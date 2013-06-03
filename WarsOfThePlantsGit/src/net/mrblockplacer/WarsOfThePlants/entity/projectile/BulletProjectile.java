@@ -5,8 +5,8 @@ import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
 
 public class BulletProjectile extends Projectile {
 
-//	public static final int FIRE_RATE = 15;
-	
+	// public static final int FIRE_RATE = 15;
+
 	public BulletProjectile(int x, int y, double dir) {
 		super(x, y, dir);
 		range = 200;
