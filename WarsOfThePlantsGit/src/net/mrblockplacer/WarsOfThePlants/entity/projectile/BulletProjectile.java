@@ -5,12 +5,14 @@ import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
 
 public class BulletProjectile extends Projectile {
 
+//	public static final int FIRE_RATE = 15;
+	
 	public BulletProjectile(int x, int y, double dir) {
 		super(x, y, dir);
 		range = 200;
 		speed = 4;
 		damageDealt = 20;
-		rateOfFire = 20;
+		rateOfFire = 10;
 		sprite = Sprite.bullet1;
 		nx = Math.cos(angle) * speed;
 		ny = Math.sin(angle) * speed;

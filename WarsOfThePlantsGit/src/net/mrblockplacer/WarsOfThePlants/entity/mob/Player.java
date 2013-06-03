@@ -1,6 +1,7 @@
 package net.mrblockplacer.WarsOfThePlants.entity.mob;
 
 import net.mrblockplacer.WarsOfThePlants.Game;
+import net.mrblockplacer.WarsOfThePlants.entity.projectile.BulletProjectile;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
 import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
 import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
@@ -13,11 +14,12 @@ public class Player extends Mob {
 	private Sprite sprite;
 	private int anim = 0;
 	private boolean walking = false;
+	private int fireCounter = 0;
 
 	public Player(Keyboard input) {
 		this.input = input;
 		sprite = Sprite.player_foward;
-//		sprite = Sprite.player_back;
+		// sprite = Sprite.player_back;
 	}
 
 	public Player(int x, int y, Keyboard input) {
@@ -25,7 +27,7 @@ public class Player extends Mob {
 		this.y = y;
 		this.input = input;
 		sprite = Sprite.player_foward;
-//		sprite = Sprite.player_back;
+		// sprite = Sprite.player_back;
 		dir = 2;
 	}
 
@@ -66,11 +68,15 @@ public class Player extends Mob {
 	}
 
 	private void updateShooting() {
-		if (Mouse.getB() == 1) {
+		// if(fireCounter > BulletProjectile.)
+		if (Mouse.getB() == 1 && fireCounter <= 0) {
 			double dx = (Mouse.getX() - (Game.width * Game.scale) / 2);
 			double dy = (Mouse.getY() - (Game.height * Game.scale) / 2);
 			double dir2 = Math.atan2(dy, dx);
 			shoot(x, y, dir2);
+			fireCounter = BulletProjectile.rateOfFire;
+		} else {
+			fireCounter--;
 		}
 	}
 

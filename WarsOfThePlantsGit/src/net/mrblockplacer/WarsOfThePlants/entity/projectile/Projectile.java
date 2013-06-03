@@ -7,8 +7,8 @@ public abstract class Projectile extends Entity {
 
 	protected final int xOrg, yOrg;
 	protected Sprite sprite;
-	protected double nx, ny, speed, rateOfFire, range, angle, damageDealt, x,
-			y, distance;
+	protected double nx, ny, speed, range, angle, damageDealt, distance, x, y;
+	public static int rateOfFire;
 
 	public Projectile(int x, int y, double dir) {
 		xOrg = x;
@@ -26,5 +26,5 @@ public abstract class Projectile extends Entity {
 		// TODO Auto-generated method stub
 		return sprite;
 	}
-	
+
 }
