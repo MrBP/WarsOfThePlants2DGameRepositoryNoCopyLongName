@@ -30,7 +30,7 @@ public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 
 	/**
-	 * The width variable for the games
+	 * The width variable for the gamess
 	 */
 	public static int width = 300;
 	public static int height = (width / 10) * 9;
