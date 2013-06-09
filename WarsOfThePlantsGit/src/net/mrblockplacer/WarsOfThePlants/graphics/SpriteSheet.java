@@ -1,6 +1,7 @@
 package net.mrblockplacer.WarsOfThePlants.graphics;
 
 import java.awt.image.BufferedImage;
+import java.io.File;
 import java.io.IOException;
 
 import javax.imageio.ImageIO;
@@ -13,7 +14,7 @@ public class SpriteSheet {
 
 	public static SpriteSheet tiles = new SpriteSheet("/textures/sheets/spritesheet.png", 256);
 	public static SpriteSheet spawn_level = new SpriteSheet("/textures/sheets/spawn_level.png", 48);
-	
+
 	public SpriteSheet(String path, int size) {
 		this.path = path;
 		this.SIZE = size;

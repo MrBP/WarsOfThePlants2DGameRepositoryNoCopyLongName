@@ -15,7 +15,7 @@ public class MainConf {
 
 	public MainConf(String s) {
 		try {
-			confFile = new File(APPDATA + "\\WarsOfThePlants\\" + s);
+			confFile = new File(APPDATA + File.separator + "WarsOfThePlants" + File.separator + s);
 			if (!confFile.exists()) {
 				confFile.getParentFile().mkdirs();
 				confFile.createNewFile();
