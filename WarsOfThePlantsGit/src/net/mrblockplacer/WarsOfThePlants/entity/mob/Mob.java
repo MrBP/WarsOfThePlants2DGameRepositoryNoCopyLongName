@@ -4,12 +4,15 @@ import net.mrblockplacer.WarsOfThePlants.entity.Entity;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.BulletProjectile;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
 import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
+import net.mrblockplacer.WarsOfThePlants.level.tile.Tile;
+import net.mrblockplacer.WarsOfThePlants.sound.Sound;
 
 public abstract class Mob extends Entity {
 
 	protected Sprite sprite;
 	protected int dir = 0;
 	protected boolean moving = false;
+	protected int waterSound = 0;
 
 	// public List<Projectile> projectiles = new ArrayList<Projectile>();
 
@@ -23,6 +26,14 @@ public abstract class Mob extends Entity {
 		if (ya < 0)
 			dir = 0;
 
+		if (!collision(xa, ya) && waterSound > 20) {
+			if (water(xa, ya)) {
+				Sound.playSound(Sound.SOUND_WATER_1);
+				waterSound = 0;
+			}
+		} else {
+			waterSound++;
+		}
 		if (!collision(0, ya)) {
 			y += ya;
 		}
@@ -36,6 +47,7 @@ public abstract class Mob extends Entity {
 		Projectile p = new BulletProjectile(x, y, dir);
 		// projectiles.add(p);
 		level.addProjectiles(p);
+		Sound.playSound(Sound.SOUND_BOUNCE);
 	}
 
 	public void update() {
@@ -51,6 +63,17 @@ public abstract class Mob extends Entity {
 			int xt = ((x + xa) + c % 2 * 14 - 8) / 16;
 			int yt = ((y + ya) + c / 2 * 12 + 3) / 16;
 			if (level.getTile(xt, yt).solid())
+				test = true;
+		}
+		return test;
+	}
+
+	protected boolean water(int xa, int ya) {
+		boolean test = false;
+		for (int c = 0; c < 4; c++) {
+			int xt = ((x + xa) + c % 2 * 14 - 8) / 16;
+			int yt = ((y + ya) + c / 2 * 12 + 3) / 16;
+			if (level.getTile(xt, yt) == Tile.spawn_water)
 				test = true;
 		}
 		return test;

@@ -21,6 +21,7 @@ import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
 import net.mrblockplacer.WarsOfThePlants.input.Keyboard;
 import net.mrblockplacer.WarsOfThePlants.input.Mouse;
 import net.mrblockplacer.WarsOfThePlants.level.Level;
+import net.mrblockplacer.WarsOfThePlants.sound.Sound;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -287,9 +288,11 @@ public class Game extends Canvas implements Runnable {
 					Dialouge.fountain = false;
 				}
 			} else {
-				if (Dialouge.fountainCounter > 2000) {
+				if (Dialouge.fountainCounter > 2000 && Dialouge.fountainCounter < 2500) {
 					level = Level.spawn2;
+					Sound.playSound(Sound.SOUND_CHANGE_WORLD_1);
 					player.init(level);
+					Dialouge.fountainCounter = 3000;
 				}
 			}
 			Dialouge.fountainCounter++;
