@@ -5,8 +5,6 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
-import java.awt.event.ComponentEvent;
-import java.awt.event.ComponentListener;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferStrategy;
@@ -16,7 +14,6 @@ import java.security.AccessController;
 import java.security.PrivilegedAction;
 
 import javax.swing.JFrame;
-import javax.swing.SwingWorker;
 
 import net.mrblockplacer.WarsOfThePlants.conf.MainConf;
 import net.mrblockplacer.WarsOfThePlants.entity.mob.Player;
@@ -24,7 +21,6 @@ import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
 import net.mrblockplacer.WarsOfThePlants.input.Keyboard;
 import net.mrblockplacer.WarsOfThePlants.input.Mouse;
 import net.mrblockplacer.WarsOfThePlants.level.Level;
-import net.mrblockplacer.WarsOfThePlants.level.TileCoordinate;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -70,7 +66,7 @@ public class Game extends Canvas implements Runnable {
 		key = new Keyboard();
 		level = Level.spawn; // new SpawnLevel("/levels/spawn.png");
 		// TileCoordinate playerSpawm = new TileCoordinate(3, 65);
-		TileCoordinate playerSpawm = new TileCoordinate(22, 65);
+		// TileCoordinate playerSpawm = new TileCoordinate(22, 65);
 		// player = new Player(playerSpawm.getX(), playerSpawm.getX(), key);
 		int lastPosX = Integer.valueOf(mc.readFromKey("lastPosX"));
 		int lastPosY = Integer.valueOf(mc.readFromKey("lastPosY"));
@@ -141,8 +137,7 @@ public class Game extends Canvas implements Runnable {
 		System.exit(0);
 		try {
 			thread.join();
-		}
-		catch (InterruptedException e) {
+		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
 		System.out.println("STOPPED");
@@ -280,8 +275,7 @@ public class Game extends Canvas implements Runnable {
 				canPlayerMove = true;
 			}
 			mc.writeToKey("showInstructions", "no");
-		}
-		else {
+		} else {
 			canPlayerMove = true;
 		}
 		if (player.x >= 187 && player.x <= 291 && player.y >= 164 && player.y <= 290) {
@@ -292,8 +286,7 @@ public class Game extends Canvas implements Runnable {
 				if (Dialouge.fountainCounter > 1000) {
 					Dialouge.fountain = false;
 				}
-			}
-			else {
+			} else {
 				if (Dialouge.fountainCounter > 2000) {
 					level = Level.spawn2;
 					player.init(level);
@@ -304,7 +297,7 @@ public class Game extends Canvas implements Runnable {
 	}
 
 	public static void main(String[] args) {
-		AccessController.doPrivileged(new PrivilegedAction() {
+		AccessController.doPrivileged(new PrivilegedAction<Object>() {
 			public Object run() {
 				// privileged code goes here, for example:
 				Game game = new Game();
@@ -316,7 +309,6 @@ public class Game extends Canvas implements Runnable {
 				game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				game.frame.setLocationRelativeTo(null);
 				game.frame.setVisible(true);
-
 				game.start();
 				return null; // nothing to return
 			}
