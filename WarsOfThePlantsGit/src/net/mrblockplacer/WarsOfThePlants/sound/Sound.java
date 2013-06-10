@@ -8,7 +8,7 @@ public class Sound {
 	public static String SOUND_BOUNCE = "bounce";
 	public static String SOUND_CHANGE_WORLD_1 = "changeWorld1";
 	public static String SOUND_WATER_1 = "water1";
-	
+
 	public static void playSound(String sound) {
 		try {
 			AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(Sound.class.getResource("/sounds/" + sound + ".wav"));

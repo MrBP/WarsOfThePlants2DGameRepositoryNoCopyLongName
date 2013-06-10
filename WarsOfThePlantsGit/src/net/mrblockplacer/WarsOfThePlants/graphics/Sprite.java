@@ -16,32 +16,48 @@ public class Sprite {
 	// Sprite for rock, flower, grass, etc
 	public static Sprite grass = new Sprite(16, 0, 0, SpriteSheet.tiles);
 	public static Sprite flower = new Sprite(16, 1, 0, SpriteSheet.tiles);
-	public static Sprite rock = new Sprite(16, 2, 0, SpriteSheet.tiles);
+	public static Sprite spawn_rock = new Sprite(16, 2, 0, SpriteSheet.tiles);
 
 	public static Sprite bullet1 = new Sprite(16, 3, 0, SpriteSheet.tiles);
-	// Sprite for spawn_level
-	public static Sprite spawn_grass = new Sprite(16, 0, 0,
-			SpriteSheet.spawn_level);
-	public static Sprite spawn_hedge = new Sprite(16, 1, 0,
-			SpriteSheet.spawn_level);
-	public static Sprite spawn_water = new Sprite(16, 2, 1,
-			SpriteSheet.spawn_level);
-	// public static Sprite spawn_water = new Sprite(16, 2, 0,
-	// SpriteSheet.spawn_level);
-	public static Sprite spawn_wall1 = new Sprite(16, 0, 1,
-			SpriteSheet.spawn_level);
-	public static Sprite spawn_wall2 = new Sprite(16, 0, 2,
-			SpriteSheet.spawn_level);
-	public static Sprite spawn_floor = new Sprite(16, 1, 1,
-			SpriteSheet.spawn_level);
+	// grass
+	public static Sprite spawn_grass1 = new Sprite(16, 0, 1, SpriteSheet.tiles);
+	public static Sprite spawn_grass2 = new Sprite(16, 0, 2, SpriteSheet.tiles);
+	public static Sprite spawn_grass3 = new Sprite(16, 0, 3, SpriteSheet.tiles);
+	public static Sprite spawn_grass4 = new Sprite(16, 0, 4, SpriteSheet.tiles);
+	public static Sprite spawn_grass5 = new Sprite(16, 0, 5, SpriteSheet.tiles);
+	public static Sprite spawn_grass6 = new Sprite(16, 0, 6, SpriteSheet.tiles);
+	// floor
+	public static Sprite spawn_floor1 = new Sprite(16, 1, 1, SpriteSheet.tiles);
+	public static Sprite spawn_floor2 = new Sprite(16, 1, 2, SpriteSheet.tiles);
+	public static Sprite spawn_floor3 = new Sprite(16, 1, 3, SpriteSheet.tiles);
+	public static Sprite spawn_floor4 = new Sprite(16, 1, 4, SpriteSheet.tiles);
+	public static Sprite spawn_floor5 = new Sprite(16, 1, 5, SpriteSheet.tiles);
+	public static Sprite spawn_floor6 = new Sprite(16, 1, 6, SpriteSheet.tiles);
+	// wall
+	public static Sprite spawn_wall1 = new Sprite(16, 2, 1, SpriteSheet.tiles);
+	public static Sprite spawn_wall2 = new Sprite(16, 2, 2, SpriteSheet.tiles);
+	public static Sprite spawn_wall3 = new Sprite(16, 2, 3, SpriteSheet.tiles);
+	public static Sprite spawn_wall4 = new Sprite(16, 2, 4, SpriteSheet.tiles);
+	public static Sprite spawn_wall5 = new Sprite(16, 2, 5, SpriteSheet.tiles);
+	public static Sprite spawn_wall6 = new Sprite(16, 2, 6, SpriteSheet.tiles);
+	public static Sprite spawn_wall7 = new Sprite(16, 2, 7, SpriteSheet.tiles);
+	// hedge
+	public static Sprite spawn_hedge1 = new Sprite(16, 3, 1, SpriteSheet.tiles);
+	public static Sprite spawn_hedge2 = new Sprite(16, 3, 2, SpriteSheet.tiles);
+	// water
+	public static Sprite spawn_water1 = new Sprite(16, 5, 1, SpriteSheet.tiles);
+	public static Sprite spawn_water2 = new Sprite(16, 5, 2, SpriteSheet.tiles);
+	public static Sprite spawn_water3 = new Sprite(16, 5, 3, SpriteSheet.tiles);
+	public static Sprite spawn_water4 = new Sprite(16, 5, 4, SpriteSheet.tiles);
+	// misc
+	public static Sprite spawn_teleporter1 = new Sprite(16, 4, 1, SpriteSheet.tiles);
+	public static Sprite spawn_teleporter2 = new Sprite(16, 4, 2, SpriteSheet.tiles);
 
 	// Sprite for player
 	// x=0 y=5 because you select a square 32x32
 	public static Sprite player_foward = new Sprite(32, 0, 5, SpriteSheet.tiles);
-	public static Sprite player_foward_1 = new Sprite(32, 0, 6,
-			SpriteSheet.tiles);
-	public static Sprite player_foward_2 = new Sprite(32, 0, 7,
-			SpriteSheet.tiles);
+	public static Sprite player_foward_1 = new Sprite(32, 0, 6, SpriteSheet.tiles);
+	public static Sprite player_foward_2 = new Sprite(32, 0, 7, SpriteSheet.tiles);
 
 	public static Sprite player_back = new Sprite(32, 2, 5, SpriteSheet.tiles);
 	public static Sprite player_back_1 = new Sprite(32, 2, 6, SpriteSheet.tiles);
@@ -76,10 +92,20 @@ public class Sprite {
 	private void load() {
 		for (int y = 0; y < SIZE; y++) {
 			for (int x = 0; x < SIZE; x++) {
-				pixels[x + y * SIZE] = sheet.pixels[(x + this.x) + (y + this.y)
-						* sheet.SIZE];
+				pixels[x + y * SIZE] = sheet.pixels[(x + this.x) + (y + this.y) * sheet.SIZE];
 			}
 		}
 	}
 
 }
+
+/*
+ * 
+ * public static Sprite spawn_grass = new Sprite(16, 0, 0,
+ * SpriteSheet.spawn_level); public static Sprite spawn_hedge = new Sprite(16,
+ * 1, 0, SpriteSheet.spawn_level); public static Sprite spawn_water = new
+ * Sprite(16, 2, 1, SpriteSheet.spawn_level); public static Sprite spawn_wall1 =
+ * new Sprite(16, 0, 1, SpriteSheet.spawn_level); public static Sprite
+ * spawn_wall2 = new Sprite(16, 0, 2, SpriteSheet.spawn_level); public static
+ * Sprite spawn_floor = new Sprite(16, 1, 1, SpriteSheet.spawn_level);
+ */

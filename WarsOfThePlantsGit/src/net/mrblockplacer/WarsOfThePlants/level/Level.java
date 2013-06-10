@@ -94,20 +94,70 @@ public class Level {
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height)
 			return Tile.voidTile;
-		if (tiles[x + y * width] == Tile.col_spawn_floor)
-			return Tile.spawn_floor;
-		if (tiles[x + y * width] == Tile.col_spawn_grass)
-			return Tile.spawn_grass;
-		if (tiles[x + y * width] == Tile.col_spawn_hedge)
-			return Tile.spawn_hedge;
+		// grass
+		if (tiles[x + y * width] == Tile.col_spawn_grass1)
+			return Tile.spawn_grass1;
+		if (tiles[x + y * width] == Tile.col_spawn_grass2)
+			return Tile.spawn_grass2;
+		if (tiles[x + y * width] == Tile.col_spawn_grass3)
+			return Tile.spawn_grass3;
+		if (tiles[x + y * width] == Tile.col_spawn_grass4)
+			return Tile.spawn_grass4;
+		if (tiles[x + y * width] == Tile.col_spawn_grass5)
+			return Tile.spawn_grass5;
+		if (tiles[x + y * width] == Tile.col_spawn_grass6)
+			return Tile.spawn_grass6;
+		// floor
+		if (tiles[x + y * width] == Tile.col_spawn_floor1)
+			return Tile.spawn_floor1;
+		if (tiles[x + y * width] == Tile.col_spawn_floor2)
+			return Tile.spawn_floor2;
+		if (tiles[x + y * width] == Tile.col_spawn_floor3)
+			return Tile.spawn_floor3;
+		if (tiles[x + y * width] == Tile.col_spawn_floor4)
+			return Tile.spawn_floor4;
+		if (tiles[x + y * width] == Tile.col_spawn_floor5)
+			return Tile.spawn_floor5;
+		if (tiles[x + y * width] == Tile.col_spawn_floor6)
+			return Tile.spawn_floor6;
+
+		// wall
 		if (tiles[x + y * width] == Tile.col_spawn_wall1)
 			return Tile.spawn_wall1;
 		if (tiles[x + y * width] == Tile.col_spawn_wall2)
 			return Tile.spawn_wall2;
-		if (tiles[x + y * width] == Tile.col_spawn_water)
-			return Tile.spawn_water;
+		if (tiles[x + y * width] == Tile.col_spawn_wall3)
+			return Tile.spawn_wall3;
+		if (tiles[x + y * width] == Tile.col_spawn_wall4)
+			return Tile.spawn_wall4;
+		if (tiles[x + y * width] == Tile.col_spawn_wall5)
+			return Tile.spawn_wall5;
+		if (tiles[x + y * width] == Tile.col_spawn_wall6)
+			return Tile.spawn_wall6;
+		if (tiles[x + y * width] == Tile.col_spawn_wall7)
+			return Tile.spawn_wall7;
+		// hedge
+		if (tiles[x + y * width] == Tile.col_spawn_hedge1)
+			return Tile.spawn_hedge1;
+		if (tiles[x + y * width] == Tile.col_spawn_hedge2)
+			return Tile.spawn_hedge2;
+		// water
 
-		return Tile.spawn_water;
+		if (tiles[x + y * width] == Tile.col_spawn_water1)
+			return Tile.spawn_water1;
+		if (tiles[x + y * width] == Tile.col_spawn_water2)
+			return Tile.spawn_water2;
+		if (tiles[x + y * width] == Tile.col_spawn_water3)
+			return Tile.spawn_water3;
+		if (tiles[x + y * width] == Tile.col_spawn_water4)
+			return Tile.spawn_water4;
+		// misc
+		if (tiles[x + y * width] == Tile.col_spawn_teleporter1)
+			return Tile.spawn_teleporter1;
+		if (tiles[x + y * width] == Tile.col_spawn_teleporter2)
+			return Tile.spawn_teleporter2;
+
+		return Tile.spawn_grass1;
 	}
 
 	public List<Projectile> getProjectiles() {

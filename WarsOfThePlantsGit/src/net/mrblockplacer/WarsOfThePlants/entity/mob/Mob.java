@@ -73,7 +73,13 @@ public abstract class Mob extends Entity {
 		for (int c = 0; c < 4; c++) {
 			int xt = ((x + xa) + c % 2 * 14 - 8) / 16;
 			int yt = ((y + ya) + c / 2 * 12 + 3) / 16;
-			if (level.getTile(xt, yt) == Tile.spawn_water)
+			if (level.getTile(xt, yt) == Tile.spawn_water1)
+				test = true;
+			if (level.getTile(xt, yt) == Tile.spawn_water2)
+				test = true;
+			if (level.getTile(xt, yt) == Tile.spawn_water3)
+				test = true;
+			if (level.getTile(xt, yt) == Tile.spawn_water4)
 				test = true;
 		}
 		return test;

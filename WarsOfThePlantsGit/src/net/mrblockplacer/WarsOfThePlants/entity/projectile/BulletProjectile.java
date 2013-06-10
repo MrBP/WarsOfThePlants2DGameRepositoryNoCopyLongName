@@ -12,7 +12,7 @@ public class BulletProjectile extends Projectile {
 		range = 200;
 		speed = 4;
 		damageDealt = 20;
-		rateOfFire = 10;
+		rateOfFire = 30;
 		sprite = Sprite.bullet1;
 		nx = Math.cos(angle) * speed;
 		ny = Math.sin(angle) * speed;
