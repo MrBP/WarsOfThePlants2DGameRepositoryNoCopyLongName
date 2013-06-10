@@ -7,6 +7,7 @@ import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
 import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
 import net.mrblockplacer.WarsOfThePlants.input.Keyboard;
 import net.mrblockplacer.WarsOfThePlants.input.Mouse;
+import net.mrblockplacer.WarsOfThePlants.level.TileCoordinate;
 
 public class Player extends Mob {
 
@@ -128,6 +129,11 @@ public class Player extends Mob {
 
 		screen.renderPlayer(x - 16, y - 16, sprite, flip);
 
+	}
+
+	public void setXY(TileCoordinate newPos) {
+		this.x = newPos.getX();
+		this.y = newPos.getY();
 	}
 
 }

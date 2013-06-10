@@ -21,6 +21,7 @@ import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
 import net.mrblockplacer.WarsOfThePlants.input.Keyboard;
 import net.mrblockplacer.WarsOfThePlants.input.Mouse;
 import net.mrblockplacer.WarsOfThePlants.level.Level;
+import net.mrblockplacer.WarsOfThePlants.level.TileCoordinate;
 import net.mrblockplacer.WarsOfThePlants.sound.Sound;
 
 public class Game extends Canvas implements Runnable {
@@ -186,6 +187,7 @@ public class Game extends Canvas implements Runnable {
 		mc.writeToKey("isFirstRun", "no");
 		mc.writeToKey("lastPosX", "125");
 		mc.writeToKey("lastPosY", "125");
+		mc.writeToKey("game-sounds", "true");
 	}
 
 	// int x = 0, y = 0;
@@ -230,7 +232,11 @@ public class Game extends Canvas implements Runnable {
 		// Mouse.getY());
 		// g.drawString("X: " + Mouse.getX() + " Y: " + Mouse.getY(),
 		// Mouse.getX(), Mouse.getY());
-		renderText(g);
+		try {
+			renderText(g);
+		} catch (InterruptedException e) {
+			e.printStackTrace();
+		}
 		// g.fillRect(x, y, xScroll, yScroll)
 		g.dispose();
 		bs.show();
@@ -242,7 +248,7 @@ public class Game extends Canvas implements Runnable {
 		return i;
 	}
 
-	private void renderText(Graphics g) {
+	private void renderText(Graphics g) throws InterruptedException {
 		String s;
 		int j;
 		g.setColor(Color.YELLOW);
@@ -291,7 +297,10 @@ public class Game extends Canvas implements Runnable {
 				if (Dialouge.fountainCounter > 2000 && Dialouge.fountainCounter < 2500) {
 					level = Level.spawn2;
 					Sound.playSound(Sound.SOUND_CHANGE_WORLD_1);
+					Thread.sleep(1000);
+					TileCoordinate newPos = new TileCoordinate(3, 3);
 					player.init(level);
+					player.setXY(newPos);
 					Dialouge.fountainCounter = 3000;
 				}
 			}
