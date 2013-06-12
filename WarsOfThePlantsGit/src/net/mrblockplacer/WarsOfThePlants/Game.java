@@ -27,8 +27,6 @@ import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
 import net.mrblockplacer.WarsOfThePlants.input.Keyboard;
 import net.mrblockplacer.WarsOfThePlants.input.Mouse;
 import net.mrblockplacer.WarsOfThePlants.level.Level;
-import net.mrblockplacer.WarsOfThePlants.level.TileCoordinate;
-import net.mrblockplacer.WarsOfThePlants.sound.Sound;
 
 //import java.awt.Image;
 
@@ -83,8 +81,8 @@ public class Game extends Canvas implements Runnable {
 		// player = new Player(playerSpawm.getX(), playerSpawm.getX(), key);
 		int lastPosX = Integer.valueOf(mc.readFromKey("lastPosX"));
 		int lastPosY = Integer.valueOf(mc.readFromKey("lastPosY"));
-		player = new Player(30, 30, key);
-//		player = new Player(lastPosX, lastPosY, key);
+		// player = new Player(30, 30, key);
+		player = new Player(lastPosX, lastPosY, key);
 		// player = new Player(30, 30, key);
 		player.init(level);
 		addKeyListener(key);
@@ -315,25 +313,26 @@ public class Game extends Canvas implements Runnable {
 			canPlayerMove = true;
 		}
 		if (player.x >= 187 && player.x <= 291 && player.y >= 164 && player.y <= 290) {
-			if (Dialouge.fountain) {
-				s = "It's a fountain :D";
-				j = getCenter(s);
-				g.drawString(s, j, FIRST_LINE);
-				if (Dialouge.fountainCounter > 1000) {
-					Dialouge.fountain = false;
-				}
-			} else {
-				if (Dialouge.fountainCounter > 2000 && Dialouge.fountainCounter < 2500) {
-					level = Level.spawn2;
-					Sound.playSound(Sound.SOUND_CHANGE_WORLD_1);
-					Thread.sleep(1000);
-					TileCoordinate newPos = new TileCoordinate(3, 3);
-					player.init(level);
-					player.setXY(newPos);
-					Dialouge.fountainCounter = 3000;
-				}
-			}
-			Dialouge.fountainCounter++;
+			// if (Dialouge.fountain) {
+			// s = "It's a fountain :D";
+			// j = getCenter(s);
+			// g.drawString(s, j, FIRST_LINE);
+			// if (Dialouge.fountainCounter > 1000) {
+			// Dialouge.fountain = false;
+			// }
+			// } else {
+			// if (Dialouge.fountainCounter > 2000 && Dialouge.fountainCounter <
+			// 2500) {
+			// level = Level.spawn2;
+			// Sound.playSound(Sound.SOUND_CHANGE_WORLD_1);
+			// Thread.sleep(1000);
+			// TileCoordinate newPos = new TileCoordinate(3, 3);
+			// player.init(level);
+			// player.setXY(newPos);
+			// Dialouge.fountainCounter = 3000;
+			// }
+			// }
+			// Dialouge.fountainCounter++;
 		}
 	}
 
