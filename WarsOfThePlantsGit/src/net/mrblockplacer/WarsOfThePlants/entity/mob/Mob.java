@@ -1,9 +1,11 @@
 package net.mrblockplacer.WarsOfThePlants.entity.mob;
 
+import net.mrblockplacer.WarsOfThePlants.Game;
 import net.mrblockplacer.WarsOfThePlants.entity.Entity;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.BulletProjectile;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
 import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
+import net.mrblockplacer.WarsOfThePlants.level.Level;
 import net.mrblockplacer.WarsOfThePlants.level.tile.Tile;
 import net.mrblockplacer.WarsOfThePlants.sound.Sound;
 
@@ -13,6 +15,9 @@ public abstract class Mob extends Entity {
 	protected int dir = 0;
 	protected boolean moving = false;
 	protected int waterSound = 0;
+	public static boolean hasPhaseSuit = false;
+	protected int fireCounter = 0;
+	public int health = 6;
 
 	// public List<Projectile> projectiles = new ArrayList<Projectile>();
 
@@ -26,7 +31,7 @@ public abstract class Mob extends Entity {
 		if (ya < 0)
 			dir = 0;
 
-		if (!collision(xa, ya) && waterSound > 20) {
+		if ((!collision(xa, ya) || hasPhaseSuit) && waterSound > 20) {
 			if (water(xa, ya)) {
 				Sound.playSound(Sound.SOUND_WATER_1);
 				waterSound = 0;
@@ -34,11 +39,11 @@ public abstract class Mob extends Entity {
 		} else {
 			waterSound++;
 		}
-		if (!collision(0, ya)) {
+		if (!collision(0, ya) || hasPhaseSuit) {
 			y += ya;
 		}
 
-		if (!collision(xa, 0)) {
+		if (!collision(xa, 0) || hasPhaseSuit) {
 			x += xa;
 		}
 	}
@@ -64,6 +69,20 @@ public abstract class Mob extends Entity {
 			int yt = ((y + ya) + c / 2 * 12 + 3) / 16;
 			if (level.getTile(xt, yt).solid())
 				test = true;
+			// if (this.x < )
+			for (Entity entity : Level.entities) {
+				System.out.println(entity);
+				if (entity instanceof Mob) {
+					if (entity != this) {
+						if (this.x > entity.x - 3 && this.x < entity.x + 3) {
+							if (this.y > entity.y - 3 && this.y < entity.y + 3) {
+								test = true;
+							}
+						}
+					}
+					// if(this.x)
+				}
+			}
 		}
 		return test;
 	}

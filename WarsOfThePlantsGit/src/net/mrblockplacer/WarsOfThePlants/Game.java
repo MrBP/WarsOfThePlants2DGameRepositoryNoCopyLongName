@@ -22,11 +22,14 @@ import java.security.PrivilegedAction;
 import javax.swing.JFrame;
 
 import net.mrblockplacer.WarsOfThePlants.conf.MainConf;
+import net.mrblockplacer.WarsOfThePlants.entity.mob.Jabba;
 import net.mrblockplacer.WarsOfThePlants.entity.mob.Player;
 import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
 import net.mrblockplacer.WarsOfThePlants.input.Keyboard;
 import net.mrblockplacer.WarsOfThePlants.input.Mouse;
 import net.mrblockplacer.WarsOfThePlants.level.Level;
+import net.mrblockplacer.WarsOfThePlants.level.TileCoordinate;
+import net.mrblockplacer.WarsOfThePlants.sound.Sound;
 
 //import java.awt.Image;
 
@@ -46,7 +49,8 @@ public class Game extends Canvas implements Runnable {
 	private JFrame frame;
 	private Keyboard key;
 	public Level level;
-	private Player player;
+	public static Player player;
+	public static Jabba jabba;
 	private boolean running = false;
 	int FIRST_LINE = height;
 	int SECOND_LINE = height + 25;
@@ -81,9 +85,12 @@ public class Game extends Canvas implements Runnable {
 		// player = new Player(playerSpawm.getX(), playerSpawm.getX(), key);
 		int lastPosX = Integer.valueOf(mc.readFromKey("lastPosX"));
 		int lastPosY = Integer.valueOf(mc.readFromKey("lastPosY"));
-		// player = new Player(30, 30, key);
-		player = new Player(lastPosX, lastPosY, key);
-		// player = new Player(30, 30, key);
+		// player = new Player(1623, 1434, key);
+		// player = new Player(1490, 1488, key);
+		// player = new Player(lastPosX, lastPosY, key);
+		player = new Player(25, 60, key);
+		jabba = new Jabba(60, 30);
+		jabba.init(level);
 		player.init(level);
 		addKeyListener(key);
 		Mouse mouse = new Mouse();
@@ -203,6 +210,7 @@ public class Game extends Canvas implements Runnable {
 		// if (key.right) x++;
 		// if (key.left) x--;
 		player.update();
+		jabba.update();
 		level.update();
 	}
 
@@ -220,8 +228,8 @@ public class Game extends Canvas implements Runnable {
 		int xScroll = player.x - screen.width / 2;
 		int yScroll = player.y - screen.height / 2;
 		level.render(xScroll, yScroll, screen);
+		jabba.render(screen);
 		player.render(screen);
-
 		for (int i = 0; i < pixels.length; i++) {
 			pixels[i] = screen.pixels[i];
 		}
@@ -233,9 +241,7 @@ public class Game extends Canvas implements Runnable {
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Verdana", 0, 25));
 		// System.out.println(player.x + "   " + player.y);
-		// g.drawString("X: " + new TileCoordinate(player.x, player.y).getX() +
-		// " Y: " + new TileCoordinate(player.x, player.y).getY(), Mouse.getX(),
-		// Mouse.getY());
+		g.drawString("X: " + player.x + " Y: " + player.y, Mouse.getX(), Mouse.getY());
 		// g.drawString("X: " + Mouse.getX() + " Y: " + Mouse.getY(),
 		// Mouse.getX(), Mouse.getY());
 		try {
@@ -333,6 +339,15 @@ public class Game extends Canvas implements Runnable {
 			// }
 			// }
 			// Dialouge.fountainCounter++;
+		}
+		if (player.y >= 1450 && player.y <= 1456 && player.x >= 1624 && player.x <= 1625) {
+			level = Level.spawn2;
+			Sound.playSound(Sound.SOUND_CHANGE_WORLD_1);
+			Thread.sleep(1000);
+			TileCoordinate newPos = new TileCoordinate(3, 3);
+			player.init(level);
+			player.setXY(newPos);
+
 		}
 	}
 

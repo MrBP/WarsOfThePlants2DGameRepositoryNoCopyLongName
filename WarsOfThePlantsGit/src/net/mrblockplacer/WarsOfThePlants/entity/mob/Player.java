@@ -7,6 +7,7 @@ import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
 import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
 import net.mrblockplacer.WarsOfThePlants.input.Keyboard;
 import net.mrblockplacer.WarsOfThePlants.input.Mouse;
+import net.mrblockplacer.WarsOfThePlants.level.Level;
 import net.mrblockplacer.WarsOfThePlants.level.TileCoordinate;
 
 public class Player extends Mob {
@@ -15,13 +16,13 @@ public class Player extends Mob {
 	private Sprite sprite;
 	private int anim = 0;
 	private boolean walking = false;
-	private int fireCounter = 0;
-	public int health = 6;
 
 	public Player(Keyboard input) {
 		this.input = input;
 		sprite = Sprite.player_foward;
 		// sprite = Sprite.player_back;
+//		Level.entities.add(this);
+
 	}
 
 	public Player(int x, int y, Keyboard input) {
@@ -31,6 +32,8 @@ public class Player extends Mob {
 		sprite = Sprite.player_foward;
 		// sprite = Sprite.player_back;
 		dir = 2;
+		
+		Level.entities.add(this);
 	}
 
 	public void update() {

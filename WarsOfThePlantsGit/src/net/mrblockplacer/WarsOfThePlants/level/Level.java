@@ -18,7 +18,7 @@ public class Level {
 	public static Level spawn = new SpawnLevel("/levels/maze.png");
 	public static Level spawn2 = new SpawnLevel("/levels/spawn.png");
 
-	private List<Entity> entities = new ArrayList<Entity>();
+	public static List<Entity> entities = new ArrayList<Entity>();
 	private List<Projectile> projectiles = new ArrayList<Projectile>();
 
 	public Level(int width, int height) {
@@ -81,9 +81,9 @@ public class Level {
 			}
 		}
 
-		for (int i = 0; i < entities.size(); i++) {
-			entities.get(i).render(screen);
-		}
+//		for (int i = 0; i < entities.size(); i++) {
+//			entities.get(i).render(screen);
+//		}
 		for (int i = 0; i < getProjectiles().size(); i++) {
 			getProjectiles().get(i).render(screen);
 		}
