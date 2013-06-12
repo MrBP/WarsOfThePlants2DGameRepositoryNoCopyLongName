@@ -14,8 +14,7 @@ public class SpawnLevel extends Level {
 	protected void loadLevel(String path) {
 
 		try {
-			BufferedImage image = ImageIO.read(SpawnLevel.class
-					.getResource(path));
+			BufferedImage image = ImageIO.read(SpawnLevel.class.getResource(path));
 			int w = width = image.getWidth();
 			int h = height = image.getHeight();
 			tiles = new int[w * h];

@@ -16,6 +16,7 @@ public class Player extends Mob {
 	private int anim = 0;
 	private boolean walking = false;
 	private int fireCounter = 0;
+	public int health = 6;
 
 	public Player(Keyboard input) {
 		this.input = input;
@@ -47,7 +48,16 @@ public class Player extends Mob {
 				xa--;
 			if (input.right)
 				xa++;
-
+			if (input.exit)
+				System.exit(0);
+//			if (input.zoomOut) {
+//				Game.scale+=0.1;
+//				System.out.println("zoomOut");
+//			}
+//			if (input.zoomIn) {
+//				Game.scale-=0.1;
+//				System.out.println("zoomIn");
+//			}
 			if (xa != 0 || ya != 0) {
 				move(xa, ya);
 				walking = true;

@@ -5,11 +5,17 @@ import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
+import java.awt.Image;
+import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStreamReader;
+import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 
@@ -23,6 +29,8 @@ import net.mrblockplacer.WarsOfThePlants.input.Mouse;
 import net.mrblockplacer.WarsOfThePlants.level.Level;
 import net.mrblockplacer.WarsOfThePlants.level.TileCoordinate;
 import net.mrblockplacer.WarsOfThePlants.sound.Sound;
+
+//import java.awt.Image;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
@@ -51,6 +59,9 @@ public class Game extends Canvas implements Runnable {
 	public static MainConf mc = new MainConf("conf.conf");
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
+	public static String username;
+	public static String uniqueID;
+	public static String localhost;
 
 	public Game() {
 		if (mc.readFromKey("isFirstRun") == null) {
@@ -72,7 +83,8 @@ public class Game extends Canvas implements Runnable {
 		// player = new Player(playerSpawm.getX(), playerSpawm.getX(), key);
 		int lastPosX = Integer.valueOf(mc.readFromKey("lastPosX"));
 		int lastPosY = Integer.valueOf(mc.readFromKey("lastPosY"));
-		player = new Player(lastPosX, lastPosY, key);
+		player = new Player(30, 30, key);
+//		player = new Player(lastPosX, lastPosY, key);
 		// player = new Player(30, 30, key);
 		player.init(level);
 		addKeyListener(key);
@@ -87,25 +99,21 @@ public class Game extends Canvas implements Runnable {
 
 			@Override
 			public void windowOpened(WindowEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void windowIconified(WindowEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void windowDeiconified(WindowEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void windowDeactivated(WindowEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
@@ -116,13 +124,11 @@ public class Game extends Canvas implements Runnable {
 
 			@Override
 			public void windowClosed(WindowEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 
 			@Override
 			public void windowActivated(WindowEvent e) {
-				// TODO Auto-generated method stub
 
 			}
 		});
@@ -202,6 +208,8 @@ public class Game extends Canvas implements Runnable {
 		level.update();
 	}
 
+	Image heart = Toolkit.getDefaultToolkit().getImage(Game.class.getResource("/textures/heart.png"));
+
 	public void render() {
 		BufferStrategy bs = getBufferStrategy();
 		if (bs == null) {
@@ -226,7 +234,7 @@ public class Game extends Canvas implements Runnable {
 		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
 		g.setColor(Color.WHITE);
 		g.setFont(new Font("Verdana", 0, 25));
-		System.out.println(player.x + "   " + player.y);
+		// System.out.println(player.x + "   " + player.y);
 		// g.drawString("X: " + new TileCoordinate(player.x, player.y).getX() +
 		// " Y: " + new TileCoordinate(player.x, player.y).getY(), Mouse.getX(),
 		// Mouse.getY());
@@ -237,14 +245,35 @@ public class Game extends Canvas implements Runnable {
 		} catch (InterruptedException e) {
 			e.printStackTrace();
 		}
+		renderHearts(g);
 		// g.fillRect(x, y, xScroll, yScroll)
 		g.dispose();
 		bs.show();
 	}
 
+	private void renderHearts(Graphics g) {
+		g.setColor(Color.black);
+		// g.fillRect(width * scale - 240, height * scale - 50, 240, 60);
+		g.fillRect(0, height * scale - 50, width * scale, 60);
+		// g.drawRect(width*scale-50, height*scale-50, 60, 60);
+		if (player.health >= 1)
+			g.drawImage(heart, width * scale - 240, height * scale - 40, 40, 40, null);
+		if (player.health >= 2)
+			g.drawImage(heart, width * scale - 240 + 40, height * scale - 40, 40, 40, null);
+		if (player.health >= 3)
+			g.drawImage(heart, width * scale - 240 + 80, height * scale - 40, 40, 40, null);
+		if (player.health >= 4)
+			g.drawImage(heart, width * scale - 240 + 120, height * scale - 40, 40, 40, null);
+		if (player.health >= 5)
+			g.drawImage(heart, width * scale - 240 + 160, height * scale - 40, 40, 40, null);
+		if (player.health >= 6)
+			g.drawImage(heart, width * scale - 240 + 200, height * scale - 40, 40, 40, null);
+
+	}
+
 	private int getCenter(String s) {
 		int i = (getWidth() / 2) - (s.length() * 6);
-		System.out.println(i);
+		// System.out.println(i);
 		return i;
 	}
 
@@ -308,7 +337,35 @@ public class Game extends Canvas implements Runnable {
 		}
 	}
 
+	public static String getIp() throws Exception {
+		URL whatismyip = new URL("http://checkip.amazonaws.com");
+		BufferedReader in = null;
+		try {
+			in = new BufferedReader(new InputStreamReader(whatismyip.openStream()));
+			String ip = in.readLine();
+			return ip;
+		} finally {
+			if (in != null) {
+				try {
+					in.close();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+	}
+
 	public static void main(String[] args) {
+		// username = args[0];
+		// uniqueID = args[1];
+
+		try {
+			localhost = getIp();
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+
+		System.out.println(localhost);
 		AccessController.doPrivileged(new PrivilegedAction<Object>() {
 			public Object run() {
 				// privileged code goes here, for example:

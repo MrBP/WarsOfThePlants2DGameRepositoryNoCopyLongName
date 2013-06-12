@@ -14,7 +14,7 @@ public class Level {
 	protected int height;
 	protected int[] tilesInt;
 	protected int[] tiles;
-	public static Level spawn = new SpawnLevel("/levels/spawn3.png");
+	public static Level spawn = new SpawnLevel("/textures/sheets/map_1.png");
 	public static Level spawn2 = new SpawnLevel("/levels/spawn.png");
 
 	private List<Entity> entities = new ArrayList<Entity>();
