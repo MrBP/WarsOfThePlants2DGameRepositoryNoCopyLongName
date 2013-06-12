@@ -5,7 +5,6 @@ import java.util.Random;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
 import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
 import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
-import net.mrblockplacer.WarsOfThePlants.level.Level;
 
 public class Jabba extends Mob {
 	private int anim = 0;
@@ -16,7 +15,7 @@ public class Jabba extends Mob {
 
 	public Jabba() {
 		sprite = Sprite.player_foward;
-//		Level.entities.add(this);
+		// Level.entities.add(this);
 
 	}
 
@@ -25,7 +24,7 @@ public class Jabba extends Mob {
 		this.y = y;
 		sprite = Sprite.player_foward;
 		dir = 2;
-		Level.entities.add(this);
+		// Level.mobs.add(this);
 
 	}
 

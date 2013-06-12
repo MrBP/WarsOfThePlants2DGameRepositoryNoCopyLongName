@@ -1,11 +1,9 @@
 package net.mrblockplacer.WarsOfThePlants.entity.mob;
 
-import net.mrblockplacer.WarsOfThePlants.Game;
 import net.mrblockplacer.WarsOfThePlants.entity.Entity;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.BulletProjectile;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
 import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
-import net.mrblockplacer.WarsOfThePlants.level.Level;
 import net.mrblockplacer.WarsOfThePlants.level.tile.Tile;
 import net.mrblockplacer.WarsOfThePlants.sound.Sound;
 
@@ -70,19 +68,21 @@ public abstract class Mob extends Entity {
 			if (level.getTile(xt, yt).solid())
 				test = true;
 			// if (this.x < )
-			for (Entity entity : Level.entities) {
-				System.out.println(entity);
-				if (entity instanceof Mob) {
-					if (entity != this) {
-						if (this.x > entity.x - 3 && this.x < entity.x + 3) {
-							if (this.y > entity.y - 3 && this.y < entity.y + 3) {
-								test = true;
-							}
-						}
-					}
-					// if(this.x)
-				}
-			}
+			// for (Mob entity : Level.mobs) {
+			// // System.out.println(entity);
+			// if (entity != this) {
+			// System.out.println(entity);
+			//
+			// if (this.x > entity.x - 1 && this.x < entity.x + 1) {
+			// if (this.y > entity.y - 1 && this.y < entity.y + 1) {
+			// test = true;
+			// }
+			// }
+			// }
+			// // if(this.x)
+			//
+			// }
+			System.out.println();
 		}
 		return test;
 	}

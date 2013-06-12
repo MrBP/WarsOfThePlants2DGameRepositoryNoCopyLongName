@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.mrblockplacer.WarsOfThePlants.entity.Entity;
+import net.mrblockplacer.WarsOfThePlants.entity.mob.Mob;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
 import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
 import net.mrblockplacer.WarsOfThePlants.level.tile.Tile;
@@ -19,6 +20,7 @@ public class Level {
 	public static Level spawn2 = new SpawnLevel("/levels/spawn.png");
 
 	public static List<Entity> entities = new ArrayList<Entity>();
+	public static List<Mob> mobs = new ArrayList<Mob>();
 	private List<Projectile> projectiles = new ArrayList<Projectile>();
 
 	public Level(int width, int height) {

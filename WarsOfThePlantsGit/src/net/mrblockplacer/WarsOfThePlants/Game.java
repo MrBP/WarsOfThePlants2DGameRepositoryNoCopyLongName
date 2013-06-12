@@ -83,13 +83,13 @@ public class Game extends Canvas implements Runnable {
 		// TileCoordinate playerSpawm = new TileCoordinate(3, 65);
 		// TileCoordinate playerSpawm = new TileCoordinate(22, 65);
 		// player = new Player(playerSpawm.getX(), playerSpawm.getX(), key);
-		int lastPosX = Integer.valueOf(mc.readFromKey("lastPosX"));
-		int lastPosY = Integer.valueOf(mc.readFromKey("lastPosY"));
+		// int lastPosX = Integer.valueOf(mc.readFromKey("lastPosX"));
+		// int lastPosY = Integer.valueOf(mc.readFromKey("lastPosY"));
 		// player = new Player(1623, 1434, key);
 		// player = new Player(1490, 1488, key);
 		// player = new Player(lastPosX, lastPosY, key);
-		player = new Player(25, 60, key);
-		jabba = new Jabba(60, 30);
+		player = new Player(30, 30, key);
+		jabba = new Jabba(30, 30);
 		jabba.init(level);
 		player.init(level);
 		addKeyListener(key);

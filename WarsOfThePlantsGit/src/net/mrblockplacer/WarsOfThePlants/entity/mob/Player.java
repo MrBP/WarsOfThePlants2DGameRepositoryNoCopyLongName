@@ -7,7 +7,6 @@ import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
 import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
 import net.mrblockplacer.WarsOfThePlants.input.Keyboard;
 import net.mrblockplacer.WarsOfThePlants.input.Mouse;
-import net.mrblockplacer.WarsOfThePlants.level.Level;
 import net.mrblockplacer.WarsOfThePlants.level.TileCoordinate;
 
 public class Player extends Mob {
@@ -21,7 +20,7 @@ public class Player extends Mob {
 		this.input = input;
 		sprite = Sprite.player_foward;
 		// sprite = Sprite.player_back;
-//		Level.entities.add(this);
+		// Level.entities.add(this);
 
 	}
 
@@ -32,8 +31,8 @@ public class Player extends Mob {
 		sprite = Sprite.player_foward;
 		// sprite = Sprite.player_back;
 		dir = 2;
-		
-		Level.entities.add(this);
+
+		// Level.mobs.add(this);
 	}
 
 	public void update() {
@@ -53,14 +52,14 @@ public class Player extends Mob {
 				xa++;
 			if (input.exit)
 				System.exit(0);
-//			if (input.zoomOut) {
-//				Game.scale+=0.1;
-//				System.out.println("zoomOut");
-//			}
-//			if (input.zoomIn) {
-//				Game.scale-=0.1;
-//				System.out.println("zoomIn");
-//			}
+			// if (input.zoomOut) {
+			// Game.scale+=0.1;
+			// System.out.println("zoomOut");
+			// }
+			// if (input.zoomIn) {
+			// Game.scale-=0.1;
+			// System.out.println("zoomIn");
+			// }
 			if (xa != 0 || ya != 0) {
 				move(xa, ya);
 				walking = true;
