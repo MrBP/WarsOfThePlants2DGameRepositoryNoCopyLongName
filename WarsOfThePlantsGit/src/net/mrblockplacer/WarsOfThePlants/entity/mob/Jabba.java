@@ -32,14 +32,14 @@ public class Jabba extends Mob {
 
 	public void update() {
 		int rnd;
-		if (waitTime >= mustWaitTime) {
+		if (waitTime >= mustWaitTime || isIntersection()) {
 			rnd = rand.nextInt(4) + 1;
 			waitTime = 0;
 		} else {
 			rnd = curRand;
 			waitTime++;
 		}
-		// System.out.pssrintln(rnd);
+		// System.out.println(rnd);
 		int xa = 0, ya = 0;
 		if (anim < 7500)
 			anim++;
@@ -64,6 +64,31 @@ public class Jabba extends Mob {
 		clear();
 		updateShooting();
 		curRand = rnd;
+	}
+
+	private boolean isIntersection() {
+		int dir1 = this.x - 16;
+		int dir2 = this.x + 16;
+		int dir3 = this.y - 16;
+		int dir4 = this.y + 16;
+		System.out.println(dir1);
+		boolean t1 = level.getTile(dir1, this.y).solid();
+		boolean t2 = level.getTile(dir2, this.y).solid();
+		boolean t3 = level.getTile(this.x, dir3).solid();
+		boolean t4 = level.getTile(this.x, dir4).solid();
+		int i = 0;
+		if (!t1)
+			i++;
+		if (!t2)
+			i++;
+		if (!t3)
+			i++;
+		if (!t4)
+			i++;
+		if (i > 3)
+			return false;
+		else
+			return false;
 	}
 
 	private void clear() {

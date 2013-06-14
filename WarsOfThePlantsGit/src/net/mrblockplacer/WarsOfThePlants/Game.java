@@ -89,7 +89,7 @@ public class Game extends Canvas implements Runnable {
 		// player = new Player(1490, 1488, key);
 		// player = new Player(lastPosX, lastPosY, key);
 		player = new Player(30, 30, key);
-		jabba = new Jabba(30, 30);
+		jabba = new Jabba(25, 80);
 		jabba.init(level);
 		player.init(level);
 		addKeyListener(key);

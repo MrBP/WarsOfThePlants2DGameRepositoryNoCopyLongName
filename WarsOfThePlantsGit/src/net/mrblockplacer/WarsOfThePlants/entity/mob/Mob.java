@@ -13,11 +13,9 @@ public abstract class Mob extends Entity {
 	protected int dir = 0;
 	protected boolean moving = false;
 	protected int waterSound = 0;
-	public static boolean hasPhaseSuit = false;
+	public boolean hasPhaseSuit = false;
 	protected int fireCounter = 0;
 	public int health = 6;
-
-	// public List<Projectile> projectiles = new ArrayList<Projectile>();
 
 	public void move(int xa, int ya) {
 		if (xa > 0)
