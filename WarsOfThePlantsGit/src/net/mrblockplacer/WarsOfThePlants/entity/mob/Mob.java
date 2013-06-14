@@ -46,7 +46,6 @@ public abstract class Mob extends Entity {
 
 	protected void shoot(int x, int y, double dir) {
 		Projectile p = new BulletProjectile(x, y, dir);
-		// projectiles.add(p);
 		level.addProjectiles(p);
 		Sound.playSound(Sound.SOUND_BOUNCE);
 	}
@@ -80,7 +79,7 @@ public abstract class Mob extends Entity {
 			// // if(this.x)
 			//
 			// }
-			System.out.println();
+//			System.out.println();
 		}
 		return test;
 	}

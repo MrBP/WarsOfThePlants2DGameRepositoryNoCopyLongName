@@ -39,7 +39,6 @@ public class Jabba extends Mob {
 			rnd = curRand;
 			waitTime++;
 		}
-		// System.out.println(rnd);
 		int xa = 0, ya = 0;
 		if (anim < 7500)
 			anim++;
@@ -53,7 +52,6 @@ public class Jabba extends Mob {
 			xa--;
 		if (rnd == 4)
 			xa++;
-		// }
 		if ((xa != 0 || ya != 0) && !collision(xa, ya)) {
 			move(xa, ya);
 			walking = true;
@@ -71,7 +69,6 @@ public class Jabba extends Mob {
 		int dir2 = this.x + 16;
 		int dir3 = this.y - 16;
 		int dir4 = this.y + 16;
-		System.out.println(dir1);
 		boolean t1 = level.getTile(dir1, this.y).solid();
 		boolean t2 = level.getTile(dir2, this.y).solid();
 		boolean t3 = level.getTile(this.x, dir3).solid();

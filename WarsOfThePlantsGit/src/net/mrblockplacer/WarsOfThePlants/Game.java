@@ -64,13 +64,14 @@ public class Game extends Canvas implements Runnable {
 	public static String username;
 	public static String uniqueID;
 	public static String localhost;
+	public static boolean playingGame = false;
 
 	public Game() {
+
 		if (mc.readFromKey("isFirstRun") == null) {
 			System.out.println("HIHIIH");
 			writeFirstKeys();
 		}
-		// System.out.println(mc.readFromKey("showInstructions"));
 		if (mc.readFromKey("showInstructions").trim().equalsIgnoreCase("yes")) {
 			showInstructions = true;
 		}
@@ -140,6 +141,7 @@ public class Game extends Canvas implements Runnable {
 
 		thread = new Thread(this, "Display");
 		thread.start();
+
 	}
 
 	public synchronized void stop() {
@@ -167,8 +169,12 @@ public class Game extends Canvas implements Runnable {
 		int updates = 0;
 
 		requestFocus();
-
+		int test = 0;
 		while (running) {
+			if (playingGame && test == 0) {
+				Sound.playMusic("");
+				test = 1;
+			}
 			curTime++;
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
@@ -204,17 +210,21 @@ public class Game extends Canvas implements Runnable {
 	// int x = 0, y = 0;
 
 	public void update() {
-		key.update();
-		// if (key.up) y--;
-		// if (key.down) y++;
-		// if (key.right) x++;
-		// if (key.left) x--;
-		player.update();
-		jabba.update();
-		level.update();
+		if (playingGame) {
+			key.update();
+			// if (key.up) y--;
+			// if (key.down) y++;
+			// if (key.right) x++;
+			// if (key.left) x--;
+			player.update();
+			jabba.update();
+			level.update();
+		}
 	}
 
 	Image heart = Toolkit.getDefaultToolkit().getImage(Game.class.getResource("/textures/heart.png"));
+	Image loadingBackground = Toolkit.getDefaultToolkit().getImage(Game.class.getResource("/textures/loading.png"));
+	int timeee = 0;
 
 	public void render() {
 		BufferStrategy bs = getBufferStrategy();
@@ -222,35 +232,46 @@ public class Game extends Canvas implements Runnable {
 			createBufferStrategy(3);
 			return;
 		}
-
-		screen.clear();
-
-		int xScroll = player.x - screen.width / 2;
-		int yScroll = player.y - screen.height / 2;
-		level.render(xScroll, yScroll, screen);
-		jabba.render(screen);
-		player.render(screen);
-		for (int i = 0; i < pixels.length; i++) {
-			pixels[i] = screen.pixels[i];
-		}
-
 		Graphics g = bs.getDrawGraphics();
-		// g.setColor(Color.BLACK);
-		// g.fillRect(0, 0, getWidth(), getHeight());
-		g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
-		g.setColor(Color.WHITE);
-		g.setFont(new Font("Verdana", 0, 25));
-		// System.out.println(player.x + "   " + player.y);
-		g.drawString("X: " + player.x + " Y: " + player.y, Mouse.getX(), Mouse.getY());
-		// g.drawString("X: " + Mouse.getX() + " Y: " + Mouse.getY(),
-		// Mouse.getX(), Mouse.getY());
-		try {
-			renderText(g);
-		} catch (InterruptedException e) {
-			e.printStackTrace();
+
+		if (playingGame) {
+			screen.clear();
+
+			int xScroll = player.x - screen.width / 2;
+			int yScroll = player.y - screen.height / 2;
+			level.render(xScroll, yScroll, screen);
+			jabba.render(screen);
+			player.render(screen);
+			for (int i = 0; i < pixels.length; i++) {
+				pixels[i] = screen.pixels[i];
+			}
+
+			// g.setColor(Color.BLACK);
+			// g.fillRect(0, 0, getWidth(), getHeight());
+			g.drawImage(image, 0, 0, getWidth(), getHeight(), null);
+			g.setColor(Color.WHITE);
+			g.setFont(new Font("Verdana", 0, 25));
+			// System.out.println(player.x + "   " + player.y);
+			g.drawString("X: " + player.x + " Y: " + player.y, Mouse.getX(), Mouse.getY());
+			// g.drawString("X: " + Mouse.getX() + " Y: " + Mouse.getY(),
+			// Mouse.getX(), Mouse.getY());
+			try {
+				renderText(g);
+			} catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+			renderHearts(g);
+			// g.fillRect(x, y, xScroll, yScroll)
+		} else {
+			screen.clear();
+			g.drawImage(loadingBackground, 0, 0, getWidth(), getHeight(), null);
+			for (int i = 0; i < 1000000; i++) {
+				// System.out.println(i);
+			}
+			timeee++;
+			if (timeee > 5000)
+				playingGame = true;
 		}
-		renderHearts(g);
-		// g.fillRect(x, y, xScroll, yScroll)
 		g.dispose();
 		bs.show();
 	}
@@ -392,6 +413,9 @@ public class Game extends Canvas implements Runnable {
 				game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				game.frame.setLocationRelativeTo(null);
 				game.frame.setVisible(true);
+				// Sound.playSound(Sound.LOADUP);
+				Sound.playSound(Sound.LOADUP);
+
 				game.start();
 				return null; // nothing to return
 			}
