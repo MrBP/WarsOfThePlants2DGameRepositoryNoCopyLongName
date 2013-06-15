@@ -16,8 +16,9 @@ public abstract class Mob extends Entity {
 	public boolean hasPhaseSuit = false;
 	protected int fireCounter = 0;
 	public int health = 6;
+	protected int speed = 1;
 
-	public void move(int xa, int ya) {
+	public void move(int xa, int ya, Mob mob) {
 		if (xa > 0)
 			dir = 1;
 		if (xa < 0)
@@ -27,21 +28,25 @@ public abstract class Mob extends Entity {
 		if (ya < 0)
 			dir = 0;
 
-		if ((!collision(xa, ya) || hasPhaseSuit) && waterSound > 20) {
-			if (water(xa, ya)) {
+		if ((!collision(xa * mob.getSpeed(), ya * mob.getSpeed()) || hasPhaseSuit) && waterSound > 20) {
+			if (water(xa * mob.getSpeed(), ya * mob.getSpeed())) {
 				Sound.playSound(Sound.SOUND_WATER_1);
 				waterSound = 0;
 			}
 		} else {
 			waterSound++;
 		}
-		if (!collision(0, ya) || hasPhaseSuit) {
-			y += ya;
+		if (!collision(0, ya * mob.getSpeed()) || hasPhaseSuit) {
+			y += ya * mob.getSpeed();
 		}
 
-		if (!collision(xa, 0) || hasPhaseSuit) {
-			x += xa;
+		if (!collision(xa * mob.getSpeed(), 0) || hasPhaseSuit) {
+			x += xa * mob.getSpeed();
 		}
+	}
+
+	protected int getSpeed() {
+		return 1;
 	}
 
 	protected void shoot(int x, int y, double dir) {
@@ -79,7 +84,7 @@ public abstract class Mob extends Entity {
 			// // if(this.x)
 			//
 			// }
-//			System.out.println();
+			// System.out.println();
 		}
 		return test;
 	}

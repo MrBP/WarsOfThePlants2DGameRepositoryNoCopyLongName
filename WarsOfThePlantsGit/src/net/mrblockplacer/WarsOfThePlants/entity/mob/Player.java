@@ -15,13 +15,11 @@ public class Player extends Mob {
 	private Sprite sprite;
 	private int anim = 0;
 	private boolean walking = false;
+	private int speed = 2;
 
 	public Player(Keyboard input) {
 		this.input = input;
 		sprite = Sprite.player_foward;
-		// sprite = Sprite.player_back;
-		// Level.entities.add(this);
-
 	}
 
 	public Player(int x, int y, Keyboard input) {
@@ -29,11 +27,12 @@ public class Player extends Mob {
 		this.y = y;
 		this.input = input;
 		sprite = Sprite.player_foward;
-		// sprite = Sprite.player_back;
 		dir = 2;
-
-		// Level.mobs.add(this);
 	}
+
+	int lastTime1 = 0;
+	int lastTime2 = 0;
+	int lastSpeed = 1;
 
 	public void update() {
 		if (Game.canPlayerMove) {
@@ -52,6 +51,24 @@ public class Player extends Mob {
 				xa++;
 			if (input.exit)
 				System.exit(0);
+			if(input.boss)
+				Game.bossTime = !Game.bossTime;
+			if (input.speedUp && lastTime1 <= 0 && speed <10) {
+				speed++;
+				System.out.println(speed);
+				lastTime1 = 100;
+			} else {
+				lastTime1--;
+			}
+
+			if (input.speedDown && lastTime2 <= 0 && speed > 1) {
+				speed--;
+				System.out.println(speed);
+				lastTime2 = 100;
+			} else {
+				lastTime2--;
+			}
+
 			// if (input.zoomOut) {
 			// Game.scale+=0.1;
 			// System.out.println("zoomOut");
@@ -61,7 +78,7 @@ public class Player extends Mob {
 			// System.out.println("zoomIn");
 			// }
 			if (xa != 0 || ya != 0) {
-				move(xa, ya);
+				move(xa, ya, this);
 				walking = true;
 			} else {
 				walking = false;
@@ -69,6 +86,10 @@ public class Player extends Mob {
 			clear();
 			updateShooting();
 		}
+	}
+
+	protected int getSpeed() {
+		return speed;
 	}
 
 	private void clear() {

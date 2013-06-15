@@ -8,16 +8,25 @@ import java.awt.Graphics;
 import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.WindowEvent;
+import java.awt.event.WindowFocusListener;
 import java.awt.event.WindowListener;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 import java.awt.image.DataBufferInt;
+import java.io.BufferedInputStream;
+import java.io.BufferedOutputStream;
 import java.io.BufferedReader;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
+import java.util.zip.ZipEntry;
+import java.util.zip.ZipInputStream;
 
 import javax.swing.JFrame;
 
@@ -29,12 +38,14 @@ import net.mrblockplacer.WarsOfThePlants.input.Keyboard;
 import net.mrblockplacer.WarsOfThePlants.input.Mouse;
 import net.mrblockplacer.WarsOfThePlants.level.Level;
 import net.mrblockplacer.WarsOfThePlants.level.TileCoordinate;
+import net.mrblockplacer.WarsOfThePlants.network.MainNetwork;
 import net.mrblockplacer.WarsOfThePlants.sound.Sound;
 
 //import java.awt.Image;
 
 public class Game extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
+	public static String APPDATA = System.getenv("APPDATA");
 
 	/**
 	 * The width variable for the gamess
@@ -46,7 +57,7 @@ public class Game extends Canvas implements Runnable {
 	public static String title = "Rain";
 	public static Long curTime = 0L;
 	private Thread thread;
-	private JFrame frame;
+	public static JFrame frame;
 	private Keyboard key;
 	public Level level;
 	public static Player player;
@@ -65,9 +76,12 @@ public class Game extends Canvas implements Runnable {
 	public static String uniqueID;
 	public static String localhost;
 	public static boolean playingGame = false;
+	public static boolean bossTime = false;
+	public static Game instance;
+	public static boolean doneDownloading = false;
 
 	public Game() {
-
+		instance = this;
 		if (mc.readFromKey("isFirstRun") == null) {
 			System.out.println("HIHIIH");
 			writeFirstKeys();
@@ -138,10 +152,50 @@ public class Game extends Canvas implements Runnable {
 
 			}
 		});
+		frame.addWindowFocusListener(new WindowFocusListener() {
 
+			@Override
+			public void windowLostFocus(WindowEvent arg0) {
+				Keyboard.reset();
+			}
+
+			@Override
+			public void windowGainedFocus(WindowEvent arg0) {
+				// TODO Auto-generated method stub
+
+			}
+		});
 		thread = new Thread(this, "Display");
 		thread.start();
+		Thread t = new Thread(new Runnable() {
 
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				new MainNetwork();
+			}
+
+		});
+		t.start();
+		Thread t2 = new Thread(new Runnable() {
+
+			@Override
+			public void run() {
+				// TODO Auto-generated method stub
+				try {
+					downloadMusic("music.zip");
+					// downloadMusic("music/MARS.wav");
+					Sound.clear();
+					doneDownloading = true;
+				} catch (MalformedURLException e) {
+					e.printStackTrace();
+				} catch (IOException e) {
+					e.printStackTrace();
+				}
+			}
+
+		});
+		t2.start();
 	}
 
 	public synchronized void stop() {
@@ -167,13 +221,17 @@ public class Game extends Canvas implements Runnable {
 		double delta = 0;
 		int frames = 0;
 		int updates = 0;
-
+		int i = 0;
 		requestFocus();
-		int test = 0;
 		while (running) {
-			if (playingGame && test == 0) {
-				Sound.playMusic("");
-				test = 1;
+			if (playingGame && !bossTime) {
+				i = 0;
+				Sound.playMusic(Sound.MUSIC_BACKGROUND1);
+			}
+			if (playingGame && bossTime && i == 0) {
+				i = 1;
+				Sound.stopMusic();
+				Sound.playBoss(Sound.MUSIC_BOSS1);
 			}
 			curTime++;
 			long now = System.nanoTime();
@@ -252,9 +310,9 @@ public class Game extends Canvas implements Runnable {
 			g.setColor(Color.WHITE);
 			g.setFont(new Font("Verdana", 0, 25));
 			// System.out.println(player.x + "   " + player.y);
-			g.drawString("X: " + player.x + " Y: " + player.y, Mouse.getX(), Mouse.getY());
-			// g.drawString("X: " + Mouse.getX() + " Y: " + Mouse.getY(),
-			// Mouse.getX(), Mouse.getY());
+			// g.drawString("X: " + player.x + " Y: " + player.y, Mouse.getX(),
+			// Mouse.getY());
+			g.drawString("X: " + Mouse.getX() + " Y: " + Mouse.getY(), Mouse.getX(), Mouse.getY());
 			try {
 				renderText(g);
 			} catch (InterruptedException e) {
@@ -296,7 +354,7 @@ public class Game extends Canvas implements Runnable {
 
 	}
 
-	private int getCenter(String s) {
+	public int getCenter(String s) {
 		int i = (getWidth() / 2) - (s.length() * 6);
 		// System.out.println(i);
 		return i;
@@ -406,21 +464,89 @@ public class Game extends Canvas implements Runnable {
 				// privileged code goes here, for example:
 				Game game = new Game();
 				game = new Game();
-				game.frame.setResizable(false);
-				game.frame.setTitle(title);
-				game.frame.add(game);
-				game.frame.pack();
-				game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				game.frame.setLocationRelativeTo(null);
-				game.frame.setVisible(true);
+				Game.frame.setResizable(false);
+				Game.frame.setTitle(title);
+				Game.frame.add(game);
+				Game.frame.pack();
+				Game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				Game.frame.setLocationRelativeTo(null);
+				Game.frame.setVisible(true);
 				// Sound.playSound(Sound.LOADUP);
-				Sound.playSound(Sound.LOADUP);
+				Sound.playSound(Sound.SOUND_LOADUP);
 
 				game.start();
 				return null; // nothing to return
 			}
 		});
 
+	}
+
+	public void downloadMusic(String file) throws MalformedURLException, IOException {
+		// dialog.progressBar.setEnabled(true);
+		if (!new File(APPDATA + File.separator + "WarsOfThePlants" + File.separator + "music").isDirectory()) {
+			new File(APPDATA + File.separator + "WarsOfThePlants" + File.separator + "music").mkdirs();
+		}
+		if (new File(APPDATA + File.separator + "WarsOfThePlants" + File.separator + "intemp.temp").exists()) {
+			return;
+		}
+		BufferedInputStream in = new BufferedInputStream(new URL("http://ftp.mrblockplacer.net/" + file).openStream());
+		FileOutputStream fos = new FileOutputStream(new File(APPDATA + File.separator + "WarsOfThePlants" + File.separator + file.replace("/", File.separator)));
+		BufferedOutputStream bout = new BufferedOutputStream(fos);
+		byte data[] = new byte[1024];
+		int read;
+		while ((read = in.read(data, 0, 1024)) >= 0) {
+			System.out.println(read);
+			bout.write(data, 0, read);
+		}
+		bout.close();
+		in.close();
+		extractMusic();
+
+	}
+
+	public boolean extractMusic() {
+
+		FileInputStream input = null;
+		ZipInputStream zipIn = null;
+		try {
+			input = new FileInputStream(APPDATA + File.separator + "WarsOfThePlants" + File.separator + "music.zip");
+			zipIn = new ZipInputStream(input);
+			ZipEntry currentEntry = zipIn.getNextEntry();
+			while (currentEntry != null)
+				if (currentEntry.getName().contains("META-INF")) {
+					currentEntry = zipIn.getNextEntry();
+				} else {
+					System.out.println("Extracting " + currentEntry + "...");
+					FileOutputStream outStream;
+
+					outStream = new FileOutputStream(new File(APPDATA + File.separator + "WarsOfThePlants" + File.separator + "music", currentEntry.getName()));
+
+					byte[] buffer = new byte[1024];
+					int readLen;
+					while ((readLen = zipIn.read(buffer, 0, buffer.length)) > 0) {
+						outStream.write(buffer, 0, readLen);
+					}
+					outStream.close();
+					currentEntry = zipIn.getNextEntry();
+				}
+		} catch (IOException e) {
+			System.err.println(e.getMessage());
+			return false;
+		} finally {
+			try {
+				zipIn.close();
+				input.close();
+			} catch (IOException e) {
+				System.err.println(e.getMessage());
+			}
+		}
+		// nativesJar.delete();
+		try {
+			new File(APPDATA + File.separator + "WarsOfThePlants" + File.separator + "intemp.temp").createNewFile();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		return true;
 	}
 
 }

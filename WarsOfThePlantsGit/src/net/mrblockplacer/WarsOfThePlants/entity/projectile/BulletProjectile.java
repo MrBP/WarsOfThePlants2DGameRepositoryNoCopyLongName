@@ -9,7 +9,7 @@ public class BulletProjectile extends Projectile {
 
 	public BulletProjectile(int x, int y, double dir) {
 		super(x, y, dir);
-		range = 200;
+		range = 800;
 		speed = 4;
 		damageDealt = 20;
 		rateOfFire = 30;

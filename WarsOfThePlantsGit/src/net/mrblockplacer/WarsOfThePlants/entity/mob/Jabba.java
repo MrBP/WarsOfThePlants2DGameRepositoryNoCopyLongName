@@ -32,7 +32,7 @@ public class Jabba extends Mob {
 
 	public void update() {
 		int rnd;
-		if (waitTime >= mustWaitTime || isIntersection()) {
+		if (waitTime >= mustWaitTime) {
 			rnd = rand.nextInt(4) + 1;
 			waitTime = 0;
 		} else {
@@ -53,7 +53,7 @@ public class Jabba extends Mob {
 		if (rnd == 4)
 			xa++;
 		if ((xa != 0 || ya != 0) && !collision(xa, ya)) {
-			move(xa, ya);
+			move(xa, ya, this);
 			walking = true;
 		} else {
 			walking = false;
@@ -64,29 +64,29 @@ public class Jabba extends Mob {
 		curRand = rnd;
 	}
 
-	private boolean isIntersection() {
-		int dir1 = this.x - 16;
-		int dir2 = this.x + 16;
-		int dir3 = this.y - 16;
-		int dir4 = this.y + 16;
-		boolean t1 = level.getTile(dir1, this.y).solid();
-		boolean t2 = level.getTile(dir2, this.y).solid();
-		boolean t3 = level.getTile(this.x, dir3).solid();
-		boolean t4 = level.getTile(this.x, dir4).solid();
-		int i = 0;
-		if (!t1)
-			i++;
-		if (!t2)
-			i++;
-		if (!t3)
-			i++;
-		if (!t4)
-			i++;
-		if (i > 3)
-			return false;
-		else
-			return false;
-	}
+	// private boolean isIntersection() {
+	// int dir1 = this.x - 16;
+	// int dir2 = this.x + 16;
+	// int dir3 = this.y - 16;
+	// int dir4 = this.y + 16;
+	// boolean t1 = level.getTile(dir1, this.y).solid();
+	// boolean t2 = level.getTile(dir2, this.y).solid();
+	// boolean t3 = level.getTile(this.x, dir3).solid();
+	// boolean t4 = level.getTile(this.x, dir4).solid();
+	// int i = 0;
+	// if (!t1)
+	// i++;
+	// if (!t2)
+	// i++;
+	// if (!t3)
+	// i++;
+	// if (!t4)
+	// i++;
+	// if (i > 3)
+	// return false;
+	// else
+	// return false;
+	// }
 
 	private void clear() {
 		for (int i = 0; i < level.getProjectiles().size(); i++) {
@@ -98,6 +98,19 @@ public class Jabba extends Mob {
 	}
 
 	private void updateShooting() {
+		if (rand.nextBoolean() && fireCounter <= 0) {
+			// double dx = 453;// (Mouse.getX() - (Game.width * Game.scale) /
+			// 2);
+			// double dy = 421;// (Mouse.getY() - (Game.height * Game.scale) /
+			// 2);
+			// double dir2 = Math.atan2(dy, dx);
+			// shoot(x, y, dir2);
+			// fireCounter = BulletProjectile.rateOfFire;
+
+		} else {
+			fireCounter--;
+		}
+
 		// if(fireCounter > BulletProjectile.)
 		// if (Mouse.getB() == 1 && fireCounter <= 0) {
 		// double dx = (Mouse.getX() - (Game.width * Game.scale) / 2);
