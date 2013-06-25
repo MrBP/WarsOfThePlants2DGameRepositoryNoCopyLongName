@@ -81,7 +81,7 @@ public class Player extends Mob {
 					lastTime2--;
 				}
 			}
-			
+
 			// if (input.zoomOut) {
 			// Game.scale+=0.1;
 			// System.out.println("zoomOut");
@@ -98,7 +98,7 @@ public class Player extends Mob {
 			}
 			clear();
 			updateShooting();
-			
+
 		}
 	}
 

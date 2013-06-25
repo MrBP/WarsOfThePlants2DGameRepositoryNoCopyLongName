@@ -32,6 +32,7 @@ import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import net.mrblockplacer.WarsOfThePlants.conf.MainConf;
 import net.mrblockplacer.WarsOfThePlants.entity.mob.Jabba;
@@ -85,7 +86,7 @@ public class Game extends Canvas implements Runnable {
 	// public static Jabba jabbalist = new Jabba()
 	// public static playerlist = new Player[50];
 	public static ArrayList<Player> playerlist = new ArrayList<Player>();
-	public static MainNetwork network;
+	public static MainNetwork network = new MainNetwork();;
 
 	public Game() {
 		instance = this;
@@ -174,16 +175,15 @@ public class Game extends Canvas implements Runnable {
 		});
 		thread = new Thread(this, "Display");
 		thread.start();
-		Thread t = new Thread(new Runnable() {
-
-			@Override
-			public void run() {
-				// TODO Auto-generated method stub
-				network = new MainNetwork();
-			}
-
-		});
-		t.start();
+		// Thread t = new Thread(new Runnable() {
+		//
+		// @Override
+		// public void run() {
+		// TODO Auto-generated method stub
+		// }
+		//
+		// });
+		// t.start();
 		Thread t2 = new Thread(new Runnable() {
 
 			@Override
@@ -276,13 +276,15 @@ public class Game extends Canvas implements Runnable {
 
 	public void update() {
 		if (playingGame) {
+//			JOptionPane.showMessageDialog(null, "HIII");
 			key.update();
+			player.update();
+			jabba.update();
+
 			// if (key.up) y--;
 			// if (key.down) y++;
 			// if (key.right) x++;
 			// if (key.left) x--;
-			player.update();
-			jabba.update();
 			level.update();
 			for (Player p : playerlist) {
 				if (p != null) {
@@ -291,6 +293,7 @@ public class Game extends Canvas implements Runnable {
 			}
 
 		}
+
 	}
 
 	Image heart = Toolkit.getDefaultToolkit().getImage(Game.class.getResource("/textures/heart.png"));
@@ -341,7 +344,7 @@ public class Game extends Canvas implements Runnable {
 		} else {
 			screen.clear();
 			g.drawImage(loadingBackground, 0, 0, getWidth(), getHeight(), null);
-			for (int i = 0; i < 1000000; i++) {
+			for (int i = 0; i < 500000; i++) {
 				// System.out.println(i);
 			}
 			timeee++;

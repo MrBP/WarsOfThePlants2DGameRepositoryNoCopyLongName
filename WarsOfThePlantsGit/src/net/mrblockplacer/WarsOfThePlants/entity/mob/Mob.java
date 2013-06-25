@@ -1,5 +1,7 @@
 package net.mrblockplacer.WarsOfThePlants.entity.mob;
 
+import javax.swing.JOptionPane;
+
 import net.mrblockplacer.WarsOfThePlants.Game;
 import net.mrblockplacer.WarsOfThePlants.entity.Entity;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.BulletProjectile;
@@ -22,6 +24,7 @@ public abstract class Mob extends Entity {
 	int counter = 10;
 
 	public void move(int xa, int ya, Mob mob) {
+
 		if (xa > 0)
 			dir = 1;
 		if (xa < 0)
@@ -39,6 +42,7 @@ public abstract class Mob extends Entity {
 		} else {
 			waterSound++;
 		}
+
 		if (!collision(0, ya * mob.getSpeed()) || hasPhaseSuit) {
 			y += ya * mob.getSpeed();
 		}
@@ -47,15 +51,17 @@ public abstract class Mob extends Entity {
 			x += xa * mob.getSpeed();
 		}
 		if (mob instanceof Player) {
-			if (((Player) mob).id == 1) {
-				if (Game.network.socket != null && counter > 100) {
-					Game.network.sendText(".modPlayer:" + mob.x + ":" + mob.y);
-					counter = 0;
-				} else {
-					counter++;
-				}
+//			JOptionPane.showMessageDialog(null, "HI");
+			// if (((Player) mob).id == 1) {
+			// Game.network.sendText("HI");
+			// if (Game.network.client != null) {
+			Game.network.sendText("HI");
+			// counter = 0;
+			// } else {
+			// counter++;
+			// }
 
-			}
+			// }
 		}
 	}
 

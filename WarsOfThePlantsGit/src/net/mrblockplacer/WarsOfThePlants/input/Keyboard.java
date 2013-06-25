@@ -22,11 +22,11 @@ public class Keyboard implements KeyListener {
 		speedDown = keys[KeyEvent.VK_DOWN];
 		crouch = keys[KeyEvent.VK_SHIFT];
 		boss = keys[KeyEvent.VK_ENTER];
-		if (keys[KeyEvent.VK_T]) {
-			isTabDown = !isTabDown;
-			System.out.println(isTabDown);
-
-		}// || keys[KeyEvent.VK_S];
+//		if (keys[KeyEvent.VK_T]) {
+//			isTabDown = !isTabDown;
+//			System.out.println(isTabDown);
+//
+//		}// || keys[KeyEvent.VK_S];
 
 		// right = keys[KeyEvent.VK_RIGHT] || keys[KeyEvent.VK_D];
 		// left = keys[KeyEvent.VK_LEFT] || keys[KeyEvent.VK_A];
