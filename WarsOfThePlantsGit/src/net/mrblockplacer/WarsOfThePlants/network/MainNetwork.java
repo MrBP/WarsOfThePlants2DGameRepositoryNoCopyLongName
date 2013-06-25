@@ -3,7 +3,6 @@ package net.mrblockplacer.WarsOfThePlants.network;
 import java.awt.BorderLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.DataInputStream;
 import java.io.DataOutputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -14,11 +13,12 @@ import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 import net.mrblockplacer.WarsOfThePlants.Game;
+import net.mrblockplacer.WarsOfThePlants.entity.mob.Player;
 
 public class MainNetwork implements Runnable {
-	private Socket socket = null;
-	private Thread thread = null;
-	private DataInputStream console = null;
+	public Socket socket = null;
+	public Thread thread = null;
+	// private DataInputStream console = null;
 	private DataOutputStream streamOut = null;
 	private ChatClientThread client = null;
 	public static JFrame jf;
@@ -58,46 +58,92 @@ public class MainNetwork implements Runnable {
 	}
 
 	public void run() {
+		sendText(".addPlayer:" + Game.player.x + ":" + Game.player.y);
 		jtf.addActionListener(new ActionListener() {
 
 			@Override
 			public void actionPerformed(ActionEvent e) {
-				try {
-					streamOut.writeUTF(jtf.getText());
-					jtf.setText("");
-					streamOut.flush();
-				} catch (IOException ioe) {
-					jta.append("Sending error: " + ioe.getMessage() + "\n");
-					try {
-						stop();
-					} catch (InterruptedException e1) {
-						e1.printStackTrace();
-					}
-				}
+				sendText(jtf.getText());
+				jtf.setText("");
 			}
 
 		});
+		while (thread != null) {
+			sendText(".modPlayer:" + Game.player.x + ":" + Game.player.y);
+		}
+	}
 
+	// public static void sendIt(String mess) {
+	// instance.sendText(mess);
+	// }
+
+	public void sendText(String mess) {
+		if (streamOut != null) {
+			try {
+				streamOut.write(mess.getBytes());// writeUTF(mess);
+				streamOut.flush();
+			} catch (IOException ioe) {
+				jta.append("Sending error: " + ioe.getMessage() + "\n");
+				try {
+					stop();
+				} catch (InterruptedException e1) {
+					e1.printStackTrace();
+				}
+			}
+		} else {
+			System.out.println("NULL");
+		}
 	}
 
 	public void handle(String msg) throws InterruptedException {
+		System.err.println(msg);
 		if (msg.equals(".bye")) {
 			// System.out.println("Good bye. Press RETURN to exit ...");
 			jta.append("Goodbye...\n");
 			stop();
+		} else if (msg.startsWith(".addPlayer")) {
+			String[] test = msg.split(":");
+			try {
+				Game.playerlist.add(new Player(Integer.parseInt(test[2]), Integer.parseInt(test[3]), Integer.parseInt(test[1])));
+			} catch (Exception e) {
+				e.printStackTrace();
+
+			}
+			// Game.playerlist.get(Integer.parseInt(test[1])).init(Game.level);
+			for (Player p : Game.playerlist) {
+				if (p.id == Integer.parseInt(test[1]))
+					p.init(Game.level);
+			}
+		} else if (msg.startsWith(".modPlayer")) {
+			String[] test = msg.split(":");
+			for (Player p : Game.playerlist) {
+				if (p.id == Integer.parseInt(test[1])) {
+					p.x = Integer.parseInt(test[2]);
+					p.y = Integer.parseInt(test[3]);
+				}
+			}
+		} else if (msg.startsWith(".removePlayer")) {
+			String[] test = msg.split(":");
+			for (Player p : Game.playerlist) {
+				if (p.id == Integer.parseInt(test[1]))
+					p.remove();
+			}
 		} else
 			jta.append(msg + "\n");
 
 	}
 
 	public void start() throws IOException, InterruptedException {
-		console = new DataInputStream(System.in);
+		// console = new DataInputStream(System.in);
 		streamOut = new DataOutputStream(socket.getOutputStream());
-		if (thread == null) {
-			client = new ChatClientThread(this, socket);
-			thread = new Thread(this);
-			thread.start();
-		}
+		// System.err.println(streamOut.writeUTF("HI"));// == null ? "hi" :
+		// "hello");
+		streamOut.write("HI".getBytes());// writeUTF("HI");
+		// if (thread == null) {
+		client = new ChatClientThread(this, socket);
+		thread = new Thread(this);
+		thread.start();
+		// }
 	}
 
 	public void stop() throws InterruptedException {
@@ -106,8 +152,8 @@ public class MainNetwork implements Runnable {
 			thread = null;
 		}
 		try {
-			if (console != null)
-				console.close();
+			// if (console != null)
+			// console.close();
 			if (streamOut != null)
 				streamOut.close();
 			if (socket != null)

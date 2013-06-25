@@ -21,10 +21,13 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.net.InetAddress;
+import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
+import java.util.ArrayList;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -59,7 +62,7 @@ public class Game extends Canvas implements Runnable {
 	private Thread thread;
 	public static JFrame frame;
 	private Keyboard key;
-	public Level level;
+	public static Level level;
 	public static Player player;
 	public static Jabba jabba;
 	private boolean running = false;
@@ -79,6 +82,10 @@ public class Game extends Canvas implements Runnable {
 	public static boolean bossTime = false;
 	public static Game instance;
 	public static boolean doneDownloading = false;
+	// public static Jabba jabbalist = new Jabba()
+	// public static playerlist = new Player[50];
+	public static ArrayList<Player> playerlist = new ArrayList<Player>();
+	public static MainNetwork network;
 
 	public Game() {
 		instance = this;
@@ -103,7 +110,7 @@ public class Game extends Canvas implements Runnable {
 		// player = new Player(1623, 1434, key);
 		// player = new Player(1490, 1488, key);
 		// player = new Player(lastPosX, lastPosY, key);
-		player = new Player(30, 30, key);
+		player = new Player(30, 30, key, 1);
 		jabba = new Jabba(25, 80);
 		jabba.init(level);
 		player.init(level);
@@ -172,7 +179,7 @@ public class Game extends Canvas implements Runnable {
 			@Override
 			public void run() {
 				// TODO Auto-generated method stub
-				new MainNetwork();
+				network = new MainNetwork();
 			}
 
 		});
@@ -277,6 +284,12 @@ public class Game extends Canvas implements Runnable {
 			player.update();
 			jabba.update();
 			level.update();
+			for (Player p : playerlist) {
+				if (p != null) {
+					p.update();
+				}
+			}
+
 		}
 	}
 
@@ -300,6 +313,11 @@ public class Game extends Canvas implements Runnable {
 			level.render(xScroll, yScroll, screen);
 			jabba.render(screen);
 			player.render(screen);
+			for (Player p : playerlist) {
+				if (p != null) {
+					p.render(screen);
+				}
+			}
 			for (int i = 0; i < pixels.length; i++) {
 				pixels[i] = screen.pixels[i];
 			}

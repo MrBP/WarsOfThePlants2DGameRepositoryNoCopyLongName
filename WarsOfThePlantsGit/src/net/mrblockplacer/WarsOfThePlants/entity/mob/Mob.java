@@ -1,10 +1,12 @@
 package net.mrblockplacer.WarsOfThePlants.entity.mob;
 
+import net.mrblockplacer.WarsOfThePlants.Game;
 import net.mrblockplacer.WarsOfThePlants.entity.Entity;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.BulletProjectile;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
 import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
 import net.mrblockplacer.WarsOfThePlants.level.tile.Tile;
+import net.mrblockplacer.WarsOfThePlants.network.MainNetwork;
 import net.mrblockplacer.WarsOfThePlants.sound.Sound;
 
 public abstract class Mob extends Entity {
@@ -17,6 +19,7 @@ public abstract class Mob extends Entity {
 	protected int fireCounter = 0;
 	public int health = 6;
 	protected int speed = 1;
+	int counter = 10;
 
 	public void move(int xa, int ya, Mob mob) {
 		if (xa > 0)
@@ -42,6 +45,17 @@ public abstract class Mob extends Entity {
 
 		if (!collision(xa * mob.getSpeed(), 0) || hasPhaseSuit) {
 			x += xa * mob.getSpeed();
+		}
+		if (mob instanceof Player) {
+			if (((Player) mob).id == 1) {
+				if (Game.network.socket != null && counter > 100) {
+					Game.network.sendText(".modPlayer:" + mob.x + ":" + mob.y);
+					counter = 0;
+				} else {
+					counter++;
+				}
+
+			}
 		}
 	}
 

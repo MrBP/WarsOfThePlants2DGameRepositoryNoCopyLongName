@@ -16,18 +16,29 @@ public class Player extends Mob {
 	private int anim = 0;
 	private boolean walking = false;
 	private int speed = 2;
+	public int id;
 
 	public Player(Keyboard input) {
 		this.input = input;
 		sprite = Sprite.player_foward;
 	}
 
-	public Player(int x, int y, Keyboard input) {
+	public Player(int x, int y, int id) {
+		this.x = x;
+		this.y = y;
+		sprite = Sprite.player_foward;
+		this.id = id;
+		dir = 2;
+
+	}
+
+	public Player(int x, int y, Keyboard input, int id) {
 		this.x = x;
 		this.y = y;
 		this.input = input;
 		sprite = Sprite.player_foward;
 		dir = 2;
+		this.id = id;
 	}
 
 	int lastTime1 = 0;
@@ -41,34 +52,36 @@ public class Player extends Mob {
 				anim++;
 			else
 				anim = 0;
-			if (input.up)
-				ya--;
-			if (input.down)
-				ya++;
-			if (input.left)
-				xa--;
-			if (input.right)
-				xa++;
-			if (input.exit)
-				System.exit(0);
-			if(input.boss)
-				Game.bossTime = !Game.bossTime;
-			if (input.speedUp && lastTime1 <= 0 && speed <10) {
-				speed++;
-				System.out.println(speed);
-				lastTime1 = 100;
-			} else {
-				lastTime1--;
-			}
+			if (input != null) {
+				if (input.up)
+					ya--;
+				if (input.down)
+					ya++;
+				if (input.left)
+					xa--;
+				if (input.right)
+					xa++;
+				if (input.exit)
+					System.exit(0);
+				if (input.boss)
+					Game.bossTime = !Game.bossTime;
+				if (input.speedUp && lastTime1 <= 0 && speed < 10) {
+					speed++;
+					System.out.println(speed);
+					lastTime1 = 100;
+				} else {
+					lastTime1--;
+				}
 
-			if (input.speedDown && lastTime2 <= 0 && speed > 1) {
-				speed--;
-				System.out.println(speed);
-				lastTime2 = 100;
-			} else {
-				lastTime2--;
+				if (input.speedDown && lastTime2 <= 0 && speed > 1) {
+					speed--;
+					System.out.println(speed);
+					lastTime2 = 100;
+				} else {
+					lastTime2--;
+				}
 			}
-
+			
 			// if (input.zoomOut) {
 			// Game.scale+=0.1;
 			// System.out.println("zoomOut");
@@ -85,6 +98,7 @@ public class Player extends Mob {
 			}
 			clear();
 			updateShooting();
+			
 		}
 	}
 
@@ -103,7 +117,7 @@ public class Player extends Mob {
 
 	private void updateShooting() {
 		// if(fireCounter > BulletProjectile.)
-		if (Mouse.getB() == 1 && fireCounter <= 0) {
+		if (Mouse.getB() == 1 && fireCounter <= 0 && input != null) {
 			double dx = (Mouse.getX() - (Game.width * Game.scale) / 2);
 			double dy = (Mouse.getY() - (Game.height * Game.scale) / 2);
 			double dir2 = Math.atan2(dy, dx);

@@ -37,7 +37,14 @@ public class ChatClientThread extends Thread {
 	public void run() {
 		while (true) {
 			try {
-				client.handle(streamIn.readUTF());
+				// client.handle(streamIn.readUTF());
+				// byte[] bs = new byte[1000];
+				// streamIn.read(bs);
+				byte[] bs = new byte[streamIn.available()+1000];
+				// ArrayList<Byte> bs = new ArrayList<Byte>();
+				// streamIn.read((byte[]) bs.toArray());
+				streamIn.read(bs);
+				client.handle(new String(bs));
 			} catch (IOException ioe) {
 				System.out.println("Listening error: " + ioe.getMessage());
 				try {

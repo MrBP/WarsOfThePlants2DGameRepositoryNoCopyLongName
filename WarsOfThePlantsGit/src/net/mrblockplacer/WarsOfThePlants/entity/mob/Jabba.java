@@ -126,12 +126,12 @@ public class Jabba extends Mob {
 	public void render(Screen screen) {
 		int flip = 0;
 		if (dir == 0) {
-			sprite = Sprite.player_foward;
+			sprite = Sprite.player_back_1;
 			if (walking) {
 				if (anim % 20 > 10) {
-					sprite = Sprite.player_foward_1;
+					sprite = Sprite.player_back_1;
 				} else {
-					sprite = Sprite.player_foward_2;
+					sprite = Sprite.player_back_1;
 				}
 			}
 		}
@@ -139,9 +139,9 @@ public class Jabba extends Mob {
 			sprite = Sprite.player_side;
 			if (walking) {
 				if (anim % 20 > 10) {
-					sprite = Sprite.player_side_1;
+					sprite = Sprite.player_back_1;
 				} else {
-					sprite = Sprite.player_side_2;
+					sprite = Sprite.player_back_1;
 				}
 			}
 
@@ -152,19 +152,19 @@ public class Jabba extends Mob {
 				if (anim % 20 > 10) {
 					sprite = Sprite.player_back_1;
 				} else {
-					sprite = Sprite.player_back_2;
+					sprite = Sprite.player_back_1;
 				}
 			}
 
 		}
 		if (dir == 3) {
 			flip = 1;
-			sprite = Sprite.player_side;
+			sprite = Sprite.player_back_1;
 			if (walking) {
 				if (anim % 20 > 10) {
-					sprite = Sprite.player_side_1;
+					sprite = Sprite.player_back_1;
 				} else {
-					sprite = Sprite.player_side_2;
+					sprite = Sprite.player_back_1;
 				}
 			}
 		}
