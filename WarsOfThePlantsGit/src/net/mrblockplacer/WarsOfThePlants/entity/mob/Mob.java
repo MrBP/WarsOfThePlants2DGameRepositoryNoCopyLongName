@@ -1,14 +1,11 @@
 package net.mrblockplacer.WarsOfThePlants.entity.mob;
 
-import javax.swing.JOptionPane;
-
 import net.mrblockplacer.WarsOfThePlants.Game;
 import net.mrblockplacer.WarsOfThePlants.entity.Entity;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.BulletProjectile;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
 import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
 import net.mrblockplacer.WarsOfThePlants.level.tile.Tile;
-import net.mrblockplacer.WarsOfThePlants.network.MainNetwork;
 import net.mrblockplacer.WarsOfThePlants.sound.Sound;
 
 public abstract class Mob extends Entity {
@@ -51,11 +48,11 @@ public abstract class Mob extends Entity {
 			x += xa * mob.getSpeed();
 		}
 		if (mob instanceof Player) {
-//			JOptionPane.showMessageDialog(null, "HI");
+			// JOptionPane.showMessageDialog(null, "HI");
 			// if (((Player) mob).id == 1) {
 			// Game.network.sendText("HI");
 			// if (Game.network.client != null) {
-			Game.network.sendText("HI");
+//			Game.network.sendText("HI");
 			// counter = 0;
 			// } else {
 			// counter++;

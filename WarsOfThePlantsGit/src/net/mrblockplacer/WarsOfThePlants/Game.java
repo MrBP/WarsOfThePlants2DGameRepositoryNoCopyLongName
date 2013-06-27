@@ -21,21 +21,18 @@ import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
-import java.net.InetAddress;
-import java.net.InetSocketAddress;
 import java.net.MalformedURLException;
 import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
 import javax.swing.JFrame;
-import javax.swing.JOptionPane;
 
 import net.mrblockplacer.WarsOfThePlants.conf.MainConf;
-import net.mrblockplacer.WarsOfThePlants.entity.mob.Jabba;
 import net.mrblockplacer.WarsOfThePlants.entity.mob.Player;
 import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
 import net.mrblockplacer.WarsOfThePlants.input.Keyboard;
@@ -65,14 +62,14 @@ public class Game extends Canvas implements Runnable {
 	private Keyboard key;
 	public static Level level;
 	public static Player player;
-	public static Jabba jabba;
+	// public static Jabba jabba;
 	private boolean running = false;
 	int FIRST_LINE = height;
 	int SECOND_LINE = height + 25;
 	int THIRD_LINE = SECOND_LINE + 25;
 	public static boolean canPlayerMove = false;
 	public static boolean showInstructions;
-	private Screen screen;
+	public static Screen screen;
 	public static MainConf mc = new MainConf("conf.conf");
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
@@ -85,8 +82,11 @@ public class Game extends Canvas implements Runnable {
 	public static boolean doneDownloading = false;
 	// public static Jabba jabbalist = new Jabba()
 	// public static playerlist = new Player[50];
-	public static ArrayList<Player> playerlist = new ArrayList<Player>();
-	public static MainNetwork network = new MainNetwork();;
+	// public static volatile ArrayList<Player> playerlist = new
+	// ArrayList<Player>();
+	public static Player[] playerlist = new Player[100];
+	public static MainNetwork network;
+	public static boolean networkUp = false;
 
 	public Game() {
 		instance = this;
@@ -112,13 +112,19 @@ public class Game extends Canvas implements Runnable {
 		// player = new Player(1490, 1488, key);
 		// player = new Player(lastPosX, lastPosY, key);
 		player = new Player(30, 30, key, 1);
-		jabba = new Jabba(25, 80);
-		jabba.init(level);
+		// jabba = new Jabba(25, 80);
+		// jabba.init(level);
+		// for(Player p : playerlist){
+
+		// }
 		player.init(level);
 		addKeyListener(key);
 		Mouse mouse = new Mouse();
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
+		MainNetwork network2 = new MainNetwork();
+		network = network2;
+
 	}
 
 	public synchronized void start() {
@@ -175,6 +181,7 @@ public class Game extends Canvas implements Runnable {
 		});
 		thread = new Thread(this, "Display");
 		thread.start();
+
 		// Thread t = new Thread(new Runnable() {
 		//
 		// @Override
@@ -276,21 +283,33 @@ public class Game extends Canvas implements Runnable {
 
 	public void update() {
 		if (playingGame) {
-//			JOptionPane.showMessageDialog(null, "HIII");
+			// JOptionPane.showMessageDialog(null, "HIII");
 			key.update();
 			player.update();
-			jabba.update();
+			// jabba.update();
 
 			// if (key.up) y--;
 			// if (key.down) y++;
 			// if (key.right) x++;
 			// if (key.left) x--;
-			level.update();
+			// Iterator<Player> itr = playerlist.iterator();
+			//
+			// while (itr.hasNext()) {
+			// Player p = itr.next();
+			// // ferrybig end
+			// if (p != null) {
+			// p.update();
+			// }
+			//
+			// }
+			// synchronized (playerlist) {
 			for (Player p : playerlist) {
 				if (p != null) {
 					p.update();
 				}
 			}
+			// }
+			level.update();
 
 		}
 
@@ -314,7 +333,7 @@ public class Game extends Canvas implements Runnable {
 			int xScroll = player.x - screen.width / 2;
 			int yScroll = player.y - screen.height / 2;
 			level.render(xScroll, yScroll, screen);
-			jabba.render(screen);
+			// jabba.render(screen);
 			player.render(screen);
 			for (Player p : playerlist) {
 				if (p != null) {
@@ -478,7 +497,6 @@ public class Game extends Canvas implements Runnable {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-
 		System.out.println(localhost);
 		AccessController.doPrivileged(new PrivilegedAction<Object>() {
 			public Object run() {
@@ -568,6 +586,15 @@ public class Game extends Canvas implements Runnable {
 			e.printStackTrace();
 		}
 		return true;
+	}
+
+	public static synchronized void addPlayer(int x, int y, int id) {
+		// playerlist.new Player(x, y, id);
+		for (int i = 0; i < playerlist.length; i++) {
+			if (playerlist[i] == null) {
+				playerlist[i] = new Player(x, y, id);
+			}
+		}
 	}
 
 }

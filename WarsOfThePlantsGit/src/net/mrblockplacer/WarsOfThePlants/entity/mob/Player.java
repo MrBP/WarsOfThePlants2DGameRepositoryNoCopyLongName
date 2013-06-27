@@ -46,6 +46,8 @@ public class Player extends Mob {
 	int lastSpeed = 1;
 
 	public void update() {
+		Game.network.sendText("HI");
+
 		if (Game.canPlayerMove) {
 			int xa = 0, ya = 0;
 			if (anim < 7500)
@@ -107,10 +109,12 @@ public class Player extends Mob {
 	}
 
 	private void clear() {
-		for (int i = 0; i < level.getProjectiles().size(); i++) {
-			Projectile p = level.getProjectiles().get(i);
-			if (p.isRemoved()) {
-				level.getProjectiles().remove(i);
+		if (level != null) {
+			for (int i = 0; i < level.getProjectiles().size(); i++) {
+				Projectile p = level.getProjectiles().get(i);
+				if (p.isRemoved()) {
+					level.getProjectiles().remove(i);
+				}
 			}
 		}
 	}
