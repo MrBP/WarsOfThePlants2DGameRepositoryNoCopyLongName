@@ -15,9 +15,9 @@ public class Level {
 	protected int height;
 	protected int[] tilesInt;
 	protected int[] tiles;
-//	public static Level spawn = new SpawnLevel("/textures/sheets/map_1.png");
-	public static Level spawn = new SpawnLevel("/levels/maze.png");
-	public static Level spawn2 = new SpawnLevel("/levels/spawn.png");
+	// public static Level spawn = new SpawnLevel("/textures/sheets/map_1.png");
+	public static Level spawn2 = new SpawnLevel("/levels/maze.png");
+	public static Level spawn = new SpawnLevel("/levels/spawn.png");
 
 	public static List<Entity> entities = new ArrayList<Entity>();
 	public static List<Mob> mobs = new ArrayList<Mob>();
@@ -83,9 +83,9 @@ public class Level {
 			}
 		}
 
-//		for (int i = 0; i < entities.size(); i++) {
-//			entities.get(i).render(screen);
-//		}
+		// for (int i = 0; i < entities.size(); i++) {
+		// entities.get(i).render(screen);
+		// }
 		for (int i = 0; i < getProjectiles().size(); i++) {
 			getProjectiles().get(i).render(screen);
 		}
@@ -169,6 +169,17 @@ public class Level {
 
 	public void setProjectiles(List<Projectile> projectiles) {
 		this.projectiles = projectiles;
+	}
+
+	public boolean tileCollision(double x, double y, double nx, double ny, int size) {
+		boolean test = false;
+		for (int c = 0; c < 4; c++) {
+			int xt = (((int) x + (int) nx) + c % 2 * size - 4) / 16;
+			int yt = (((int) y + (int) ny) + c / 2 * size) / 16;
+			if (getTile(xt, yt).solid())
+				test = true;
+		}
+		return test;
 	}
 
 }

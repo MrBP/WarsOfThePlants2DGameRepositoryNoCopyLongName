@@ -23,8 +23,12 @@ public class BulletProjectile extends Projectile {
 	}
 
 	protected void move() {
-		x += nx;
-		y += ny;
+		if (!level.tileCollision(x, y, nx, ny, 7)) {
+			x += nx;
+			y += ny;
+		} else {
+			remove();
+		}
 		if (calculateDist() >= range) {
 			remove();
 		}

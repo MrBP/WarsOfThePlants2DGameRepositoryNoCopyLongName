@@ -26,7 +26,6 @@ import java.net.URL;
 import java.security.AccessController;
 import java.security.PrivilegedAction;
 import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.zip.ZipEntry;
 import java.util.zip.ZipInputStream;
 
@@ -39,6 +38,7 @@ import net.mrblockplacer.WarsOfThePlants.input.Keyboard;
 import net.mrblockplacer.WarsOfThePlants.input.Mouse;
 import net.mrblockplacer.WarsOfThePlants.level.Level;
 import net.mrblockplacer.WarsOfThePlants.level.TileCoordinate;
+import net.mrblockplacer.WarsOfThePlants.network.Handler;
 import net.mrblockplacer.WarsOfThePlants.network.MainNetwork;
 import net.mrblockplacer.WarsOfThePlants.sound.Sound;
 
@@ -82,10 +82,9 @@ public class Game extends Canvas implements Runnable {
 	public static boolean doneDownloading = false;
 	// public static Jabba jabbalist = new Jabba()
 	// public static playerlist = new Player[50];
-	// public static volatile ArrayList<Player> playerlist = new
-	// ArrayList<Player>();
-	public static Player[] playerlist = new Player[100];
-	public static MainNetwork network;
+	public static volatile ArrayList<Player> playerlist = new ArrayList<Player>();
+	// public static Player[] playerlist = new Player[100];
+//	public static MainNetwork network;
 	public static boolean networkUp = false;
 
 	public Game() {
@@ -122,8 +121,8 @@ public class Game extends Canvas implements Runnable {
 		Mouse mouse = new Mouse();
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
-		MainNetwork network2 = new MainNetwork();
-		network = network2;
+//		MainNetwork network2 = new MainNetwork();
+//		network = network2;
 
 	}
 
@@ -284,6 +283,8 @@ public class Game extends Canvas implements Runnable {
 	public void update() {
 		if (playingGame) {
 			// JOptionPane.showMessageDialog(null, "HIII");
+			playerlist.addAll(Handler.al);
+			Handler.clearArray();
 			key.update();
 			player.update();
 			// jabba.update();
@@ -588,13 +589,13 @@ public class Game extends Canvas implements Runnable {
 		return true;
 	}
 
-	public static synchronized void addPlayer(int x, int y, int id) {
-		// playerlist.new Player(x, y, id);
-		for (int i = 0; i < playerlist.length; i++) {
-			if (playerlist[i] == null) {
-				playerlist[i] = new Player(x, y, id);
-			}
-		}
-	}
+	// public static synchronized void addPlayer(int x, int y, int id) {
+	// // playerlist.new Player(x, y, id);
+	// for (int i = 0; i < playerlist.length; i++) {
+	// if (playerlist[i] == null) {
+	// playerlist[i] = new Player(x, y, id);
+	// }
+	// }
+	// }
 
 }

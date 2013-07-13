@@ -46,7 +46,7 @@ public class Player extends Mob {
 	int lastSpeed = 1;
 
 	public void update() {
-		Game.network.sendText("HI");
+//		Game.network.sendText("HI");
 
 		if (Game.canPlayerMove) {
 			int xa = 0, ya = 0;

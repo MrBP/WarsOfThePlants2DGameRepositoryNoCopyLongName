@@ -45,7 +45,7 @@ public class MainNetwork implements Runnable {
 	public void run() {
 		client.start();
 		try {
-			client.connect(1000, "localhost", 54555, 54777);
+			client.connect(1000, "mrblockplacer.net", 54555, 54777);
 		} catch (IOException e) {
 			e.printStackTrace();
 		}

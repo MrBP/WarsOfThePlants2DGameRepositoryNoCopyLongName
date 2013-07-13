@@ -1,6 +1,5 @@
 package net.mrblockplacer.WarsOfThePlants.entity.mob;
 
-import net.mrblockplacer.WarsOfThePlants.Game;
 import net.mrblockplacer.WarsOfThePlants.entity.Entity;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.BulletProjectile;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
@@ -52,7 +51,7 @@ public abstract class Mob extends Entity {
 			// if (((Player) mob).id == 1) {
 			// Game.network.sendText("HI");
 			// if (Game.network.client != null) {
-//			Game.network.sendText("HI");
+			// Game.network.sendText("HI");
 			// counter = 0;
 			// } else {
 			// counter++;
@@ -68,6 +67,7 @@ public abstract class Mob extends Entity {
 
 	protected void shoot(int x, int y, double dir) {
 		Projectile p = new BulletProjectile(x, y, dir);
+		p.init(level);
 		level.addProjectiles(p);
 		Sound.playSound(Sound.SOUND_BOUNCE);
 	}
@@ -86,22 +86,6 @@ public abstract class Mob extends Entity {
 			int yt = ((y + ya) + c / 2 * 12 + 3) / 16;
 			if (level.getTile(xt, yt).solid())
 				test = true;
-			// if (this.x < )
-			// for (Mob entity : Level.mobs) {
-			// // System.out.println(entity);
-			// if (entity != this) {
-			// System.out.println(entity);
-			//
-			// if (this.x > entity.x - 1 && this.x < entity.x + 1) {
-			// if (this.y > entity.y - 1 && this.y < entity.y + 1) {
-			// test = true;
-			// }
-			// }
-			// }
-			// // if(this.x)
-			//
-			// }
-			// System.out.println();
 		}
 		return test;
 	}
