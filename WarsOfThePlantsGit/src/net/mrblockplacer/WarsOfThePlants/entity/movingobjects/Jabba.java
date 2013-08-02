@@ -1,8 +1,8 @@
-package net.mrblockplacer.WarsOfThePlants.entity.mob;
+package net.mrblockplacer.WarsOfThePlants.entity.movingobjects;
 
 import java.util.Random;
 
-import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
+import net.mrblockplacer.WarsOfThePlants.entity.projectiles.Projectile;
 import net.mrblockplacer.WarsOfThePlants.render.Screen;
 import net.mrblockplacer.WarsOfThePlants.render.Sprite;
 

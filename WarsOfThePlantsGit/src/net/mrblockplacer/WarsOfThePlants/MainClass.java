@@ -31,16 +31,16 @@ import java.util.zip.ZipInputStream;
 
 import javax.swing.JFrame;
 
-import net.mrblockplacer.WarsOfThePlants.conf.MainConf;
-import net.mrblockplacer.WarsOfThePlants.entity.mob.Player;
-import net.mrblockplacer.WarsOfThePlants.input.Keyboard;
-import net.mrblockplacer.WarsOfThePlants.input.Mouse;
+import net.mrblockplacer.WarsOfThePlants.conf.PropertiesAndConf;
+import net.mrblockplacer.WarsOfThePlants.entity.movingobjects.Player;
+import net.mrblockplacer.WarsOfThePlants.inputs.Keyboard;
+import net.mrblockplacer.WarsOfThePlants.inputs.Mouse;
 import net.mrblockplacer.WarsOfThePlants.level.Level;
 import net.mrblockplacer.WarsOfThePlants.level.TileCoordinate;
 import net.mrblockplacer.WarsOfThePlants.network.Handler;
 import net.mrblockplacer.WarsOfThePlants.render.Screen;
 import net.mrblockplacer.WarsOfThePlants.render.Sprite;
-import net.mrblockplacer.WarsOfThePlants.sound.Sound;
+import net.mrblockplacer.WarsOfThePlants.sound.Audio;
 
 //import java.awt.Image;
 
@@ -70,7 +70,7 @@ public class MainClass extends Canvas implements Runnable {
 	public static boolean canPlayerMove = false;
 	public static boolean showInstructions;
 	public static Screen screen;
-	public static MainConf mc = new MainConf("conf.conf");
+	public static PropertiesAndConf mc = new PropertiesAndConf("conf.conf");
 	private BufferedImage image = new BufferedImage(width, height, BufferedImage.TYPE_INT_RGB);
 	private int[] pixels = ((DataBufferInt) image.getRaster().getDataBuffer()).getData();
 	public static String username;
@@ -101,7 +101,7 @@ public class MainClass extends Canvas implements Runnable {
 		screen = new Screen(width, height);
 		frame = new JFrame();
 		key = new Keyboard();
-		level = Level.spawn; // new SpawnLevel("/levels/spawn.png");
+		level = Level.spawn; // new LevelTypeSpawn("/levels/spawn.png");
 		// TileCoordinate playerSpawm = new TileCoordinate(3, 65);
 		// TileCoordinate playerSpawm = new TileCoordinate(22, 65);
 		// player = new Player(playerSpawm.getX(), playerSpawm.getX(), key);
@@ -198,7 +198,7 @@ public class MainClass extends Canvas implements Runnable {
 				try {
 					downloadMusic("music.zip");
 					// downloadMusic("music/MARS.wav");
-					Sound.clear();
+					Audio.clear();
 					doneDownloading = true;
 				} catch (MalformedURLException e) {
 					e.printStackTrace();
@@ -239,12 +239,12 @@ public class MainClass extends Canvas implements Runnable {
 		while (running) {
 			if (playingGame && !bossTime) {
 				i = 0;
-				Sound.playMusic(Sound.MUSIC_BACKGROUND1);
+				Audio.playMusic(Audio.MUSIC_BACKGROUND1);
 			}
 			if (playingGame && bossTime && i == 0) {
 				i = 1;
-				Sound.stopMusic();
-				Sound.playBoss(Sound.MUSIC_BOSS1);
+				Audio.stopMusic();
+				Audio.playBoss(Audio.MUSIC_BOSS1);
 			}
 			curTime++;
 			long now = System.nanoTime();
@@ -452,7 +452,7 @@ public class MainClass extends Canvas implements Runnable {
 			// if (Dialouge.fountainCounter > 2000 && Dialouge.fountainCounter <
 			// 2500) {
 			// level = Level.spawn2;
-			// Sound.playSound(Sound.SOUND_CHANGE_WORLD_1);
+			// Audio.playSound(Audio.SOUND_CHANGE_WORLD_1);
 			// Thread.sleep(1000);
 			// TileCoordinate newPos = new TileCoordinate(3, 3);
 			// player.init(level);
@@ -464,7 +464,7 @@ public class MainClass extends Canvas implements Runnable {
 		}
 		if (player.y >= 1450 && player.y <= 1456 && player.x >= 1624 && player.x <= 1625) {
 			level = Level.spawn2;
-			Sound.playSound(Sound.SOUND_CHANGE_WORLD_1);
+			Audio.playSound(Audio.SOUND_CHANGE_WORLD_1);
 			Thread.sleep(1000);
 			TileCoordinate newPos = new TileCoordinate(3, 3);
 			player.init(level);
@@ -513,8 +513,8 @@ public class MainClass extends Canvas implements Runnable {
 				MainClass.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 				MainClass.frame.setLocationRelativeTo(null);
 				MainClass.frame.setVisible(true);
-				// Sound.playSound(Sound.LOADUP);
-				Sound.playSound(Sound.SOUND_LOADUP);
+				// Audio.playSound(Audio.LOADUP);
+				Audio.playSound(Audio.SOUND_LOADUP);
 
 				game.start();
 				return null; // nothing to return

@@ -5,16 +5,16 @@ import java.io.IOException;
 
 import javax.imageio.ImageIO;
 
-public class SpriteSheet {
+public class SpriteSheets {
 
 	private String path;
 	public final int SIZE;
 	public int[] pixels;
 
-	public static SpriteSheet tiles = new SpriteSheet("/textures/sheets/spritesheet.png", 256);
-	public static SpriteSheet spawn_level = new SpriteSheet("/textures/sheets/spawn_level.png", 48);
+	public static SpriteSheets tiles = new SpriteSheets("/textures/sheets/spritesheet.png", 256);
+	public static SpriteSheets spawn_level = new SpriteSheets("/textures/sheets/spawn_level.png", 48);
 
-	public SpriteSheet(String path, int size) {
+	public SpriteSheets(String path, int size) {
 		this.path = path;
 		this.SIZE = size;
 		pixels = new int[SIZE * SIZE];
@@ -23,7 +23,7 @@ public class SpriteSheet {
 
 	private void load() {
 		try {
-			BufferedImage image = ImageIO.read(SpriteSheet.class.getResource(path));
+			BufferedImage image = ImageIO.read(SpriteSheets.class.getResource(path));
 			int w = image.getWidth();
 			int h = image.getHeight();
 			image.getRGB(0, 0, w, h, pixels, 0, w);

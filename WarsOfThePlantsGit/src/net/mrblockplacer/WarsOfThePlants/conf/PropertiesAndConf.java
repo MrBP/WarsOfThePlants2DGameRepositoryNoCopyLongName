@@ -6,11 +6,11 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.util.Properties;
 
-public class MainConf {
+public class PropertiesAndConf {
 	String APPDATA = System.getenv("APPDATA");
 	private File confFile;
 
-	public MainConf(String s) {
+	public PropertiesAndConf(String s) {
 		try {
 			confFile = new File(APPDATA + File.separator + "WarsOfThePlants" + File.separator + s);
 			if (!confFile.exists()) {

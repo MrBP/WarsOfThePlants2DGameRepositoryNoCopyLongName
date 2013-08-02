@@ -2,11 +2,11 @@ package net.mrblockplacer.WarsOfThePlants.level;
 
 import java.util.Random;
 
-public class RandomLevel extends Level {
+public class LevelTypeRandom extends Level {
 
 	private static final Random random = new Random();
 
-	public RandomLevel(int width, int height) {
+	public LevelTypeRandom(int width, int height) {
 		super(width, height);
 	}
 

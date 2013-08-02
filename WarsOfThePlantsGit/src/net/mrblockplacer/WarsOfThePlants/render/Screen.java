@@ -2,7 +2,7 @@ package net.mrblockplacer.WarsOfThePlants.render;
 
 import java.util.Random;
 
-import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
+import net.mrblockplacer.WarsOfThePlants.entity.projectiles.Projectile;
 import net.mrblockplacer.WarsOfThePlants.level.tile.Tile;
 
 public class Screen {

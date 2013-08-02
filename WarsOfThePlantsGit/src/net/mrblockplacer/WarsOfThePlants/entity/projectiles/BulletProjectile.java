@@ -1,4 +1,4 @@
-package net.mrblockplacer.WarsOfThePlants.entity.projectile;
+package net.mrblockplacer.WarsOfThePlants.entity.projectiles;
 
 import net.mrblockplacer.WarsOfThePlants.render.Screen;
 import net.mrblockplacer.WarsOfThePlants.render.Sprite;

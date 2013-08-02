@@ -1,10 +1,10 @@
-package net.mrblockplacer.WarsOfThePlants.entity.mob;
+package net.mrblockplacer.WarsOfThePlants.entity.movingobjects;
 
 import net.mrblockplacer.WarsOfThePlants.MainClass;
-import net.mrblockplacer.WarsOfThePlants.entity.projectile.BulletProjectile;
-import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
-import net.mrblockplacer.WarsOfThePlants.input.Keyboard;
-import net.mrblockplacer.WarsOfThePlants.input.Mouse;
+import net.mrblockplacer.WarsOfThePlants.entity.projectiles.BulletProjectile;
+import net.mrblockplacer.WarsOfThePlants.entity.projectiles.Projectile;
+import net.mrblockplacer.WarsOfThePlants.inputs.Keyboard;
+import net.mrblockplacer.WarsOfThePlants.inputs.Mouse;
 import net.mrblockplacer.WarsOfThePlants.level.TileCoordinate;
 import net.mrblockplacer.WarsOfThePlants.render.Screen;
 import net.mrblockplacer.WarsOfThePlants.render.Sprite;

@@ -1,4 +1,4 @@
-package net.mrblockplacer.WarsOfThePlants.input;
+package net.mrblockplacer.WarsOfThePlants.inputs;
 
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;

@@ -1,11 +1,11 @@
-package net.mrblockplacer.WarsOfThePlants.entity.mob;
+package net.mrblockplacer.WarsOfThePlants.entity.movingobjects;
 
 import net.mrblockplacer.WarsOfThePlants.entity.Entity;
-import net.mrblockplacer.WarsOfThePlants.entity.projectile.BulletProjectile;
-import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
+import net.mrblockplacer.WarsOfThePlants.entity.projectiles.BulletProjectile;
+import net.mrblockplacer.WarsOfThePlants.entity.projectiles.Projectile;
 import net.mrblockplacer.WarsOfThePlants.level.tile.Tile;
 import net.mrblockplacer.WarsOfThePlants.render.Sprite;
-import net.mrblockplacer.WarsOfThePlants.sound.Sound;
+import net.mrblockplacer.WarsOfThePlants.sound.Audio;
 
 public abstract class Mob extends Entity {
 
@@ -32,7 +32,7 @@ public abstract class Mob extends Entity {
 
 		if ((!collision(xa * mob.getSpeed(), ya * mob.getSpeed()) || hasPhaseSuit) && waterSound > 20) {
 			if (water(xa * mob.getSpeed(), ya * mob.getSpeed())) {
-				Sound.playSound(Sound.SOUND_WATER_1);
+				Audio.playSound(Audio.SOUND_WATER_1);
 				waterSound = 0;
 			}
 		} else {
@@ -69,7 +69,7 @@ public abstract class Mob extends Entity {
 		Projectile p = new BulletProjectile(x, y, dir);
 		p.init(level);
 		level.addProjectiles(p);
-		Sound.playSound(Sound.SOUND_BOUNCE);
+		Audio.playSound(Audio.SOUND_BOUNCE);
 	}
 
 	public void update() {

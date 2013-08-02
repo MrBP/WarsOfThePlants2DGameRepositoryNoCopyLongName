@@ -1,11 +1,12 @@
-package net.mrblockplacer.WarsOfThePlants.level.tile;
+package net.mrblockplacer.WarsOfThePlants.level.tile.spawn_level;
 
+import net.mrblockplacer.WarsOfThePlants.level.tile.Tile;
 import net.mrblockplacer.WarsOfThePlants.render.Screen;
 import net.mrblockplacer.WarsOfThePlants.render.Sprite;
 
-public class RockTile extends Tile {
+public class TileTypeWall extends Tile {
 
-	public RockTile(Sprite sprite) {
+	public TileTypeWall(Sprite sprite) {
 		super(sprite);
 	}
 
@@ -13,7 +14,7 @@ public class RockTile extends Tile {
 		screen.renderTile(x << 4, y << 4, this);
 	}
 
-	public boolean solid() {
+	public boolean solid(){
 		return true;
 	}
 }

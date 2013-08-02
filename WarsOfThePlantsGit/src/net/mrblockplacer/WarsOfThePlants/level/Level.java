@@ -4,8 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 
 import net.mrblockplacer.WarsOfThePlants.entity.Entity;
-import net.mrblockplacer.WarsOfThePlants.entity.mob.Mob;
-import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
+import net.mrblockplacer.WarsOfThePlants.entity.movingobjects.Mob;
+import net.mrblockplacer.WarsOfThePlants.entity.projectiles.Projectile;
 import net.mrblockplacer.WarsOfThePlants.level.tile.Tile;
 import net.mrblockplacer.WarsOfThePlants.render.Screen;
 
@@ -15,9 +15,9 @@ public class Level {
 	protected int height;
 	protected int[] tilesInt;
 	protected int[] tiles;
-	// public static Level spawn = new SpawnLevel("/textures/sheets/map_1.png");
-	public static Level spawn2 = new SpawnLevel("/levels/maze.png");
-	public static Level spawn = new SpawnLevel("/levels/spawn.png");
+	// public static Level spawn = new LevelTypeSpawn("/textures/sheets/map_1.png");
+	public static Level spawn2 = new LevelTypeSpawn("/levels/maze.png");
+	public static Level spawn = new LevelTypeSpawn("/levels/spawn.png");
 
 	public static List<Entity> entities = new ArrayList<Entity>();
 	public static List<Mob> mobs = new ArrayList<Mob>();
@@ -75,7 +75,7 @@ public class Level {
 				getTile(x, y).render(x, y, screen);
 				// 256 = 16 * 16
 				// if (x + y * 16 < 0 || x + y * 16 >= 256) {
-				// Tile.voidTile.render(x, y, screen);
+				// Tile.spawn_void.render(x, y, screen);
 				// // continue;
 				// } else {
 				// tiles[x + y * 16].render(x, y, screen);
@@ -96,7 +96,7 @@ public class Level {
 	// Rock = 0xFF7F7F00
 	public Tile getTile(int x, int y) {
 		if (x < 0 || y < 0 || x >= width || y >= height)
-			return Tile.voidTile;
+			return Tile.spawn_void;
 		// grass
 		if (tiles[x + y * width] == Tile.col_spawn_grass1)
 			return Tile.spawn_grass1;

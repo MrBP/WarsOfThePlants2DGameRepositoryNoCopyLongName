@@ -2,7 +2,7 @@ package net.mrblockplacer.WarsOfThePlants.network;
 
 import java.util.ArrayList;
 
-import net.mrblockplacer.WarsOfThePlants.entity.mob.Player;
+import net.mrblockplacer.WarsOfThePlants.entity.movingobjects.Player;
 
 public class Handler {
 	public static ArrayList<Player> al = new ArrayList<Player>();

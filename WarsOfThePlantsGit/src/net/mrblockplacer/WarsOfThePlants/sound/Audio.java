@@ -12,7 +12,7 @@ import javax.sound.sampled.FloatControl;
 
 import net.mrblockplacer.WarsOfThePlants.MainClass;
 
-public class Sound {
+public class Audio {
 	public static final String SOUND_BOUNCE = "zapit";
 	public static final String SOUND_CHANGE_WORLD_1 = "changeWorld1";
 	public static final String SOUND_WATER_1 = "water1";
@@ -27,7 +27,7 @@ public class Sound {
 	public static void playSound(String sound) {
 		if (Boolean.parseBoolean(MainClass.mc.readFromKey("game-sounds"))) {
 			try {
-				AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(Sound.class.getResource("/sounds/" + sound + ".wav"));
+				AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(Audio.class.getResource("/sounds/" + sound + ".wav"));
 				Clip clip = AudioSystem.getClip();
 				clip.open(audioInputStream);
 				clip.start();
