@@ -1,7 +1,7 @@
 package net.mrblockplacer.WarsOfThePlants.entity.projectile;
 
 import net.mrblockplacer.WarsOfThePlants.entity.Entity;
-import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
+import net.mrblockplacer.WarsOfThePlants.render.Sprite;
 
 public abstract class Projectile extends Entity {
 

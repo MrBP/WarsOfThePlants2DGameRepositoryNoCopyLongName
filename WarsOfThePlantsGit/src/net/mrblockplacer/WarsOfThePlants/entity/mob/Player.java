@@ -3,11 +3,11 @@ package net.mrblockplacer.WarsOfThePlants.entity.mob;
 import net.mrblockplacer.WarsOfThePlants.MainClass;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.BulletProjectile;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
-import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
-import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
 import net.mrblockplacer.WarsOfThePlants.input.Keyboard;
 import net.mrblockplacer.WarsOfThePlants.input.Mouse;
 import net.mrblockplacer.WarsOfThePlants.level.TileCoordinate;
+import net.mrblockplacer.WarsOfThePlants.render.Screen;
+import net.mrblockplacer.WarsOfThePlants.render.Sprite;
 
 public class Player extends Mob {
 

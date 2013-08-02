@@ -1,8 +1,8 @@
 package net.mrblockplacer.WarsOfThePlants.level.tile.spawn_level;
 
-import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
-import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
 import net.mrblockplacer.WarsOfThePlants.level.tile.Tile;
+import net.mrblockplacer.WarsOfThePlants.render.Screen;
+import net.mrblockplacer.WarsOfThePlants.render.Sprite;
 
 public class SpawnFloorTile extends Tile {
 

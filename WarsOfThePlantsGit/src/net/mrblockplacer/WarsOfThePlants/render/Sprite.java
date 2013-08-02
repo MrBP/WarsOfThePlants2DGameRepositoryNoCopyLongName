@@ -1,4 +1,4 @@
-package net.mrblockplacer.WarsOfThePlants.graphics;
+package net.mrblockplacer.WarsOfThePlants.render;
 
 public class Sprite {
 

@@ -6,8 +6,8 @@ import java.util.List;
 import net.mrblockplacer.WarsOfThePlants.entity.Entity;
 import net.mrblockplacer.WarsOfThePlants.entity.mob.Mob;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
-import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
 import net.mrblockplacer.WarsOfThePlants.level.tile.Tile;
+import net.mrblockplacer.WarsOfThePlants.render.Screen;
 
 public class Level {
 

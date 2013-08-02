@@ -33,13 +33,13 @@ import javax.swing.JFrame;
 
 import net.mrblockplacer.WarsOfThePlants.conf.MainConf;
 import net.mrblockplacer.WarsOfThePlants.entity.mob.Player;
-import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
-import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
 import net.mrblockplacer.WarsOfThePlants.input.Keyboard;
 import net.mrblockplacer.WarsOfThePlants.input.Mouse;
 import net.mrblockplacer.WarsOfThePlants.level.Level;
 import net.mrblockplacer.WarsOfThePlants.level.TileCoordinate;
 import net.mrblockplacer.WarsOfThePlants.network.Handler;
+import net.mrblockplacer.WarsOfThePlants.render.Screen;
+import net.mrblockplacer.WarsOfThePlants.render.Sprite;
 import net.mrblockplacer.WarsOfThePlants.sound.Sound;
 
 //import java.awt.Image;

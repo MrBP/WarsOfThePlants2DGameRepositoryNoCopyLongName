@@ -1,12 +1,12 @@
 package net.mrblockplacer.WarsOfThePlants.level.tile;
 
-import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
-import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
 import net.mrblockplacer.WarsOfThePlants.level.tile.spawn_level.SpawnFloorTile;
 import net.mrblockplacer.WarsOfThePlants.level.tile.spawn_level.SpawnGrassTile;
 import net.mrblockplacer.WarsOfThePlants.level.tile.spawn_level.SpawnHedgeTile;
 import net.mrblockplacer.WarsOfThePlants.level.tile.spawn_level.SpawnWallTile;
 import net.mrblockplacer.WarsOfThePlants.level.tile.spawn_level.SpawnWaterTile;
+import net.mrblockplacer.WarsOfThePlants.render.Screen;
+import net.mrblockplacer.WarsOfThePlants.render.Sprite;
 
 public class Tile {
 

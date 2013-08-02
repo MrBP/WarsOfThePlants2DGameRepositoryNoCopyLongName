@@ -3,8 +3,8 @@ package net.mrblockplacer.WarsOfThePlants.entity.mob;
 import net.mrblockplacer.WarsOfThePlants.entity.Entity;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.BulletProjectile;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
-import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
 import net.mrblockplacer.WarsOfThePlants.level.tile.Tile;
+import net.mrblockplacer.WarsOfThePlants.render.Sprite;
 import net.mrblockplacer.WarsOfThePlants.sound.Sound;
 
 public abstract class Mob extends Entity {

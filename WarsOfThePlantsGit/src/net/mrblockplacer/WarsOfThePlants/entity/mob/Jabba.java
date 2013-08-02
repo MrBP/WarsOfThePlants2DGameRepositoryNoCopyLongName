@@ -3,8 +3,8 @@ package net.mrblockplacer.WarsOfThePlants.entity.mob;
 import java.util.Random;
 
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
-import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
-import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
+import net.mrblockplacer.WarsOfThePlants.render.Screen;
+import net.mrblockplacer.WarsOfThePlants.render.Sprite;
 
 public class Jabba extends Mob {
 	private int anim = 0;

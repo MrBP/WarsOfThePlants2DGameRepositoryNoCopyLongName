@@ -2,8 +2,8 @@ package net.mrblockplacer.WarsOfThePlants.entity;
 
 import java.util.Random;
 
-import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
 import net.mrblockplacer.WarsOfThePlants.level.Level;
+import net.mrblockplacer.WarsOfThePlants.render.Screen;
 
 public abstract class Entity {
 	public int x, y;
