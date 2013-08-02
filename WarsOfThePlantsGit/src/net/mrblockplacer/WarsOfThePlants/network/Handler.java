@@ -2,7 +2,6 @@ package net.mrblockplacer.WarsOfThePlants.network;
 
 import java.util.ArrayList;
 
-import net.mrblockplacer.WarsOfThePlants.Game;
 import net.mrblockplacer.WarsOfThePlants.entity.mob.Player;
 import net.mrblockplacer.WarsOfThePlants.packets.SomeRequest;
 import net.mrblockplacer.WarsOfThePlants.packets.SomeResponse;
@@ -24,7 +23,7 @@ public class Handler {
 			System.out.println(obj.text);
 		}
 		if (object instanceof PacketPlayer) {
-			PacketPlayer pp = (PacketPlayer) object;
+			// PacketPlayer pp = (PacketPlayer) object;
 			// if (pp.id != Game.network.udpid) {
 			// al.add(new Player(pp.x, pp.y, pp.id));
 			// }

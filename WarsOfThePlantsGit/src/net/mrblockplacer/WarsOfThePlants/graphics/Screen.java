@@ -36,26 +36,21 @@ public class Screen {
 		}
 	}
 
-	// public void render(int xOffset, int yOffset) {
-	//
-	// for (int y = 0; y < height; y++) {
-	// int yp = y + yOffset;
-	// if (yp < 0 || yp >= height) continue;
-	//
-	// for (int x = 0; x < width; x++) {
-	// int xp = x + xOffset;
-	// if (xp < 0 || xp >= width) continue;
-	//
-	// // (xx >> 4) == (xx / 16)
-	// // el valor de tileIndex vale de 0 a 15 lo mismo, de 16 a 31 lo mismo y
-	// así para rellenar los cuadros del mismo color
-	// pixels[(x + xOffset) + (y + yOffset) * width] = Sprite.grass.pixels[(x &
-	// 15) + (y & 15) * Sprite.grass.SIZE];
-	// }
-	//
-	// }
-	//
-	// }
+	public void renderSprite(int xp, int yp, Sprite sprite, boolean stuck) {
+		if (stuck) {
+			xp -= xOffset;
+			yp -= yOffset;
+		}
+		for (int y = 0; y < sprite.getHeight(); y++) {
+			int ya = y + yp;
+			for (int x = 0; x < sprite.getWidth(); x++) {
+				int xa = x + xp;
+				if (xa < 0 || xa >= width || ya < 0 || ya >= height)
+					continue;
+				pixels[xa + ya * width] = sprite.pixels[x + y * sprite.getWidth()];
+			}
+		}
+	}
 
 	public void renderTile(int xp, int yp, Tile tile) {
 		xp -= xOffset;
@@ -66,13 +61,11 @@ public class Screen {
 
 			for (int x = 0; x < tile.sprite.SIZE; x++) {
 				int xa = x + xp;
-				if (xa < -tile.sprite.SIZE || xa >= width || ya < 0
-						|| ya >= height)
+				if (xa < -tile.sprite.SIZE || xa >= width || ya < 0 || ya >= height)
 					break;
 				if (xa < 0)
 					xa = 0;
-				pixels[xa + ya * width] = tile.sprite.pixels[x + y
-						* tile.sprite.SIZE];
+				pixels[xa + ya * width] = tile.sprite.pixels[x + y * tile.sprite.SIZE];
 			}
 		}
 

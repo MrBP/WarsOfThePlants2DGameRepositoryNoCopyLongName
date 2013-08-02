@@ -34,12 +34,12 @@ import javax.swing.JFrame;
 import net.mrblockplacer.WarsOfThePlants.conf.MainConf;
 import net.mrblockplacer.WarsOfThePlants.entity.mob.Player;
 import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
+import net.mrblockplacer.WarsOfThePlants.graphics.Sprite;
 import net.mrblockplacer.WarsOfThePlants.input.Keyboard;
 import net.mrblockplacer.WarsOfThePlants.input.Mouse;
 import net.mrblockplacer.WarsOfThePlants.level.Level;
 import net.mrblockplacer.WarsOfThePlants.level.TileCoordinate;
 import net.mrblockplacer.WarsOfThePlants.network.Handler;
-import net.mrblockplacer.WarsOfThePlants.network.MainNetwork;
 import net.mrblockplacer.WarsOfThePlants.sound.Sound;
 
 //import java.awt.Image;
@@ -82,9 +82,9 @@ public class Game extends Canvas implements Runnable {
 	public static boolean doneDownloading = false;
 	// public static Jabba jabbalist = new Jabba()
 	// public static playerlist = new Player[50];
-	public static volatile ArrayList<Player> playerlist = new ArrayList<Player>();
+	public static ArrayList<Player> playerlist = new ArrayList<Player>();
 	// public static Player[] playerlist = new Player[100];
-//	public static MainNetwork network;
+	// public static MainNetwork network;
 	public static boolean networkUp = false;
 
 	public Game() {
@@ -121,8 +121,8 @@ public class Game extends Canvas implements Runnable {
 		Mouse mouse = new Mouse();
 		addMouseListener(mouse);
 		addMouseMotionListener(mouse);
-//		MainNetwork network2 = new MainNetwork();
-//		network = network2;
+		// MainNetwork network2 = new MainNetwork();
+		// network = network2;
 
 	}
 
@@ -341,6 +341,8 @@ public class Game extends Canvas implements Runnable {
 					p.render(screen);
 				}
 			}
+			Sprite sprite = new Sprite(40, height, 0x808080);
+			screen.renderSprite(width - 40, 0, sprite, false);
 			for (int i = 0; i < pixels.length; i++) {
 				pixels[i] = screen.pixels[i];
 			}
@@ -597,5 +599,4 @@ public class Game extends Canvas implements Runnable {
 	// }
 	// }
 	// }
-
 }
