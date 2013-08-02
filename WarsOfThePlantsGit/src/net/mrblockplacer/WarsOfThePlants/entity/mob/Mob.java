@@ -49,9 +49,9 @@ public abstract class Mob extends Entity {
 		if (mob instanceof Player) {
 			// JOptionPane.showMessageDialog(null, "HI");
 			// if (((Player) mob).id == 1) {
-			// Game.network.sendText("HI");
-			// if (Game.network.client != null) {
-			// Game.network.sendText("HI");
+			// MainClass.network.sendText("HI");
+			// if (MainClass.network.client != null) {
+			// MainClass.network.sendText("HI");
 			// counter = 0;
 			// } else {
 			// counter++;

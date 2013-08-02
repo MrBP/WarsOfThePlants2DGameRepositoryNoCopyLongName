@@ -44,7 +44,7 @@ import net.mrblockplacer.WarsOfThePlants.sound.Sound;
 
 //import java.awt.Image;
 
-public class Game extends Canvas implements Runnable {
+public class MainClass extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 	public static String APPDATA = System.getenv("APPDATA");
 
@@ -78,7 +78,7 @@ public class Game extends Canvas implements Runnable {
 	public static String localhost;
 	public static boolean playingGame = false;
 	public static boolean bossTime = false;
-	public static Game instance;
+	public static MainClass instance;
 	public static boolean doneDownloading = false;
 	// public static Jabba jabbalist = new Jabba()
 	// public static playerlist = new Player[50];
@@ -87,7 +87,7 @@ public class Game extends Canvas implements Runnable {
 	// public static MainNetwork network;
 	public static boolean networkUp = false;
 
-	public Game() {
+	public MainClass() {
 		instance = this;
 		if (mc.readFromKey("isFirstRun") == null) {
 			System.out.println("HIHIIH");
@@ -316,8 +316,8 @@ public class Game extends Canvas implements Runnable {
 
 	}
 
-	Image heart = Toolkit.getDefaultToolkit().getImage(Game.class.getResource("/textures/heart.png"));
-	Image loadingBackground = Toolkit.getDefaultToolkit().getImage(Game.class.getResource("/textures/loading.png"));
+	Image heart = Toolkit.getDefaultToolkit().getImage(MainClass.class.getResource("/textures/heart.png"));
+	Image loadingBackground = Toolkit.getDefaultToolkit().getImage(MainClass.class.getResource("/textures/loading.png"));
 	int timeee = 0;
 
 	public void render() {
@@ -504,15 +504,15 @@ public class Game extends Canvas implements Runnable {
 		AccessController.doPrivileged(new PrivilegedAction<Object>() {
 			public Object run() {
 				// privileged code goes here, for example:
-				Game game = new Game();
-				game = new Game();
-				Game.frame.setResizable(false);
-				Game.frame.setTitle(title);
-				Game.frame.add(game);
-				Game.frame.pack();
-				Game.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-				Game.frame.setLocationRelativeTo(null);
-				Game.frame.setVisible(true);
+				MainClass game = new MainClass();
+				game = new MainClass();
+				MainClass.frame.setResizable(false);
+				MainClass.frame.setTitle(title);
+				MainClass.frame.add(game);
+				MainClass.frame.pack();
+				MainClass.frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+				MainClass.frame.setLocationRelativeTo(null);
+				MainClass.frame.setVisible(true);
 				// Sound.playSound(Sound.LOADUP);
 				Sound.playSound(Sound.SOUND_LOADUP);
 

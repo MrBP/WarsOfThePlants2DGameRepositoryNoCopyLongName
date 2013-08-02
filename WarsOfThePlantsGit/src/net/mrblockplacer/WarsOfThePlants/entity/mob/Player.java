@@ -1,6 +1,6 @@
 package net.mrblockplacer.WarsOfThePlants.entity.mob;
 
-import net.mrblockplacer.WarsOfThePlants.Game;
+import net.mrblockplacer.WarsOfThePlants.MainClass;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.BulletProjectile;
 import net.mrblockplacer.WarsOfThePlants.entity.projectile.Projectile;
 import net.mrblockplacer.WarsOfThePlants.graphics.Screen;
@@ -46,9 +46,9 @@ public class Player extends Mob {
 	int lastSpeed = 1;
 
 	public void update() {
-//		Game.network.sendText("HI");
+//		MainClass.network.sendText("HI");
 
-		if (Game.canPlayerMove) {
+		if (MainClass.canPlayerMove) {
 			int xa = 0, ya = 0;
 			if (anim < 7500)
 				anim++;
@@ -66,7 +66,7 @@ public class Player extends Mob {
 				if (input.exit)
 					System.exit(0);
 				if (input.boss)
-					Game.bossTime = !Game.bossTime;
+					MainClass.bossTime = !MainClass.bossTime;
 				if (input.speedUp && lastTime1 <= 0 && speed < 10) {
 					speed++;
 					System.out.println(speed);
@@ -85,11 +85,11 @@ public class Player extends Mob {
 			}
 
 			// if (input.zoomOut) {
-			// Game.scale+=0.1;
+			// MainClass.scale+=0.1;
 			// System.out.println("zoomOut");
 			// }
 			// if (input.zoomIn) {
-			// Game.scale-=0.1;
+			// MainClass.scale-=0.1;
 			// System.out.println("zoomIn");
 			// }
 			if (xa != 0 || ya != 0) {
@@ -122,8 +122,8 @@ public class Player extends Mob {
 	private void updateShooting() {
 		// if(fireCounter > BulletProjectile.)
 		if (Mouse.getB() == 1 && fireCounter <= 0 && input != null) {
-			double dx = (Mouse.getX() - (Game.width * Game.scale) / 2);
-			double dy = (Mouse.getY() - (Game.height * Game.scale) / 2);
+			double dx = (Mouse.getX() - (MainClass.width * MainClass.scale) / 2);
+			double dy = (Mouse.getY() - (MainClass.height * MainClass.scale) / 2);
 			double dir2 = Math.atan2(dy, dx);
 			shoot(x, y, dir2);
 			fireCounter = BulletProjectile.rateOfFire;

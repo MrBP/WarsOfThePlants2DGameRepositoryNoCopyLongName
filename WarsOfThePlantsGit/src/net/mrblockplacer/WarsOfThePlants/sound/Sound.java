@@ -10,7 +10,7 @@ import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 import javax.sound.sampled.FloatControl;
 
-import net.mrblockplacer.WarsOfThePlants.Game;
+import net.mrblockplacer.WarsOfThePlants.MainClass;
 
 public class Sound {
 	public static final String SOUND_BOUNCE = "zapit";
@@ -25,7 +25,7 @@ public class Sound {
 	public static long millisIn48Hours = 1000 * 60 * 5;
 
 	public static void playSound(String sound) {
-		if (Boolean.parseBoolean(Game.mc.readFromKey("game-sounds"))) {
+		if (Boolean.parseBoolean(MainClass.mc.readFromKey("game-sounds"))) {
 			try {
 				AudioInputStream audioInputStream = AudioSystem.getAudioInputStream(Sound.class.getResource("/sounds/" + sound + ".wav"));
 				Clip clip = AudioSystem.getClip();
@@ -41,14 +41,14 @@ public class Sound {
 	}
 
 	public static void playMusic(String music) {
-		if (Boolean.parseBoolean(Game.mc.readFromKey("game-sounds")) && Game.doneDownloading) {
+		if (Boolean.parseBoolean(MainClass.mc.readFromKey("game-sounds")) && MainClass.doneDownloading) {
 			Date timestamp = new Date(lastTime);
 			Date hours48ago = new Date(new Date().getTime() - millisIn48Hours);
 			if (timestamp.before(hours48ago)) {
 				try {
-					audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream(Game.APPDATA + File.separator + "WarsOfThePlants" + File.separator + "music" + File.separator + music + ".wav")));// " //+ music + ".wav"));
+					audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream(MainClass.APPDATA + File.separator + "WarsOfThePlants" + File.separator + "music" + File.separator + music + ".wav")));// " //+ music + ".wav"));
 					// audioInputStream = AudioSystem.getAudioInputStream(new
-					// FileInputStream(Game.APPDATA + File.separator +
+					// FileInputStream(MainClass.APPDATA + File.separator +
 					// "WarsOfThePlants" + File.separator + "music" +
 					// File.separator + music + ".wav"));//
 					// " //+ music + ".wav"));
@@ -68,13 +68,13 @@ public class Sound {
 	}
 
 	public static void playBoss(String music) {
-		if (Boolean.parseBoolean(Game.mc.readFromKey("game-sounds")) && Game.doneDownloading) {
+		if (Boolean.parseBoolean(MainClass.mc.readFromKey("game-sounds")) && MainClass.doneDownloading) {
 			// Date timestamp = new Date(lastTime);
 			// Date hours48ago = new Date(new Date().getTime() -
 			// millisIn48Hours);
 			// if (timestamp.before(hours48ago)) {
 			try {
-				audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream(Game.APPDATA + File.separator + "WarsOfThePlants" + File.separator + "music" + File.separator + music + ".wav")));// " //+ music + ".wav"));
+				audioInputStream = AudioSystem.getAudioInputStream(new BufferedInputStream(new FileInputStream(MainClass.APPDATA + File.separator + "WarsOfThePlants" + File.separator + "music" + File.separator + music + ".wav")));// " //+ music + ".wav"));
 				clip = AudioSystem.getClip();
 				clip.open(audioInputStream);
 				clip.loop(Clip.LOOP_CONTINUOUSLY);

@@ -99,9 +99,9 @@ public class Jabba extends Mob {
 
 	private void updateShooting() {
 		if (rand.nextBoolean() && fireCounter <= 0) {
-			// double dx = 453;// (Mouse.getX() - (Game.width * Game.scale) /
+			// double dx = 453;// (Mouse.getX() - (MainClass.width * MainClass.scale) /
 			// 2);
-			// double dy = 421;// (Mouse.getY() - (Game.height * Game.scale) /
+			// double dy = 421;// (Mouse.getY() - (MainClass.height * MainClass.scale) /
 			// 2);
 			// double dir2 = Math.atan2(dy, dx);
 			// shoot(x, y, dir2);
@@ -113,8 +113,8 @@ public class Jabba extends Mob {
 
 		// if(fireCounter > BulletProjectile.)
 		// if (Mouse.getB() == 1 && fireCounter <= 0) {
-		// double dx = (Mouse.getX() - (Game.width * Game.scale) / 2);
-		// double dy = (Mouse.getY() - (Game.height * Game.scale) / 2);
+		// double dx = (Mouse.getX() - (MainClass.width * MainClass.scale) / 2);
+		// double dy = (Mouse.getY() - (MainClass.height * MainClass.scale) / 2);
 		// double dir2 = Math.atan2(dy, dx);
 		// shoot(x, y, dir2);
 		// fireCounter = BulletProjectile.rateOfFire;
