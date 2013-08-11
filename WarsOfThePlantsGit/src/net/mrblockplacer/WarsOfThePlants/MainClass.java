@@ -80,6 +80,7 @@ public class MainClass extends Canvas implements Runnable {
 	public static boolean bossTime = false;
 	public static MainClass instance;
 	public static boolean doneDownloading = false;
+	public static boolean isOnTitleScreen = false;
 	// public static Jabba jabbalist = new Jabba()
 	// public static playerlist = new Player[50];
 	public static ArrayList<Player> playerlist = new ArrayList<Player>();
@@ -365,13 +366,27 @@ public class MainClass extends Canvas implements Runnable {
 			// g.fillRect(x, y, xScroll, yScroll)
 		} else {
 			screen.clear();
-			g.drawImage(loadingBackground, 0, 0, getWidth(), getHeight(), null);
-			for (int i = 0; i < 500000; i++) {
-				// System.out.println(i);
+			if (isOnTitleScreen) {
+			System.out.println("X: " + Mouse.getX() + " Y: " + Mouse.getY());
+
+				// draw title screen here
+//				if (Mouse.getB() == 1) {
+					if (Mouse.getX() > 10 && Mouse.getX() < 30 && Mouse.getY() > width / 4 && Mouse.getY() < width - width / 4) {
+						System.out.println("HI");
+						playingGame = true;
+					}
+//				}
+			} else {
+				g.drawImage(loadingBackground, 0, 0, getWidth(), getHeight(), null);
+				for (int i = 0; i < 500000; i++) {
+					// System.out.println(i);
+				}
+				timeee++;
+				if (timeee > 2500) {
+					isOnTitleScreen = true;
+				}
+
 			}
-			timeee++;
-			if (timeee > 5000)
-				playingGame = true;
 		}
 		g.dispose();
 		bs.show();
@@ -440,6 +455,8 @@ public class MainClass extends Canvas implements Runnable {
 		} else {
 			canPlayerMove = true;
 		}
+		g.drawString("Used Memory: " + (Runtime.getRuntime().totalMemory() / 1000000 - Runtime.getRuntime().freeMemory() / 1000000) + "(MB) / " + Runtime.getRuntime().totalMemory() / 1000000 + "(MB)", 200, 15);
+
 		if (player.x >= 187 && player.x <= 291 && player.y >= 164 && player.y <= 290) {
 			// if (Dialouge.fountain) {
 			// s = "It's a fountain :D";

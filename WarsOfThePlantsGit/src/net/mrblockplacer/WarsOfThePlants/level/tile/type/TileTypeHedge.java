@@ -1,4 +1,4 @@
-package net.mrblockplacer.WarsOfThePlants.level.tile.spawn_level;
+package net.mrblockplacer.WarsOfThePlants.level.tile.type;
 
 import net.mrblockplacer.WarsOfThePlants.level.tile.Tile;
 import net.mrblockplacer.WarsOfThePlants.render.Screen;
