@@ -367,15 +367,16 @@ public class MainClass extends Canvas implements Runnable {
 		} else {
 			screen.clear();
 			if (isOnTitleScreen) {
-			System.out.println("X: " + Mouse.getX() + " Y: " + Mouse.getY());
+				System.out.println("X: " + Mouse.getX() + " Y: " + Mouse.getY());
+				playingGame = true;
 
 				// draw title screen here
-//				if (Mouse.getB() == 1) {
-					if (Mouse.getX() > 10 && Mouse.getX() < 30 && Mouse.getY() > width / 4 && Mouse.getY() < width - width / 4) {
-						System.out.println("HI");
-						playingGame = true;
-					}
-//				}
+				// if (Mouse.getB() == 1) {
+				if (Mouse.getX() > 10 && Mouse.getX() < 30 && Mouse.getY() > width / 4 && Mouse.getY() < width - width / 4) {
+					System.out.println("HI");
+					playingGame = true;
+				}
+				// }
 			} else {
 				g.drawImage(loadingBackground, 0, 0, getWidth(), getHeight(), null);
 				for (int i = 0; i < 500000; i++) {
