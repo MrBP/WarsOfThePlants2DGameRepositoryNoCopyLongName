@@ -40,6 +40,7 @@ import net.mrblockplacer.WarsOfThePlants.level.TileCoordinate;
 import net.mrblockplacer.WarsOfThePlants.network.Handler;
 import net.mrblockplacer.WarsOfThePlants.render.Screen;
 import net.mrblockplacer.WarsOfThePlants.render.Sprite;
+import net.mrblockplacer.WarsOfThePlants.render.SpriteSheets;
 import net.mrblockplacer.WarsOfThePlants.sound.Audio;
 
 //import java.awt.Image;
@@ -335,15 +336,15 @@ public class MainClass extends Canvas implements Runnable {
 			int xScroll = player.x - screen.width / 2;
 			int yScroll = player.y - screen.height / 2;
 			level.render(xScroll, yScroll, screen);
-			// jabba.render(screen);
 			player.render(screen);
+//			screen.renderSheet(40, 40, SpriteSheets.player_down, false);
 			for (Player p : playerlist) {
 				if (p != null) {
 					p.render(screen);
 				}
 			}
-			Sprite sprite = new Sprite(40, height, 0x808080);
-			screen.renderSprite(width - 40, 0, sprite, false);
+			// Sprite sprite = new Sprite(40, height, 0x808080);
+			// screen.renderSprite(width - 40, 0, sprite, false);
 			for (int i = 0; i < pixels.length; i++) {
 				pixels[i] = screen.pixels[i];
 			}
@@ -456,7 +457,7 @@ public class MainClass extends Canvas implements Runnable {
 		} else {
 			canPlayerMove = true;
 		}
-		g.drawString("Used Memory: " + (Runtime.getRuntime().totalMemory() / 1000000 - Runtime.getRuntime().freeMemory() / 1000000) + "(MB) / " + Runtime.getRuntime().totalMemory() / 1000000 + "(MB)", 200, 15);
+		g.drawString("Used Memory: " + (Runtime.getRuntime().totalMemory() / 1000000 - Runtime.getRuntime().freeMemory() / 1000000) + "(MB) / " + Runtime.getRuntime().totalMemory() / 1000000 + "(MB)", 200, 30);
 
 		if (player.x >= 187 && player.x <= 291 && player.y >= 164 && player.y <= 290) {
 			// if (Dialouge.fountain) {

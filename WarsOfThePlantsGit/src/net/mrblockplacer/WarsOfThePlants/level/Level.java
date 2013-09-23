@@ -3,11 +3,14 @@ package net.mrblockplacer.WarsOfThePlants.level;
 import java.util.ArrayList;
 import java.util.List;
 
+import net.mrblockplacer.WarsOfThePlants.effects.Particle;
 import net.mrblockplacer.WarsOfThePlants.entity.Entity;
 import net.mrblockplacer.WarsOfThePlants.entity.movingobjects.Mob;
 import net.mrblockplacer.WarsOfThePlants.entity.projectiles.Projectile;
 import net.mrblockplacer.WarsOfThePlants.level.tile.Tile;
 import net.mrblockplacer.WarsOfThePlants.render.Screen;
+import net.mrblockplacer.WarsOfThePlants.spawner.Spawner;
+import net.mrblockplacer.WarsOfThePlants.spawner.SpawnerType;
 
 public class Level {
 
@@ -15,13 +18,15 @@ public class Level {
 	protected int height;
 	protected int[] tilesInt;
 	protected int[] tiles;
-	// public static Level spawn = new LevelTypeSpawn("/textures/sheets/map_1.png");
+	// public static Level spawn = new
+	// LevelTypeSpawn("/textures/sheets/map_1.png");
 	public static Level spawn2 = new LevelTypeSpawn("/levels/maze.png");
 	public static Level spawn = new LevelTypeSpawn("/levels/spawn.png");
 
-	public static List<Entity> entities = new ArrayList<Entity>();
-	public static List<Mob> mobs = new ArrayList<Mob>();
+	public List<Entity> entities = new ArrayList<Entity>();
+	public List<Mob> mobs = new ArrayList<Mob>();
 	private List<Projectile> projectiles = new ArrayList<Projectile>();
+	private List<Particle> particles = new ArrayList<Particle>();
 
 	public Level(int width, int height) {
 		this.width = width;
@@ -33,17 +38,25 @@ public class Level {
 	public Level(String path) {
 		loadLevel(path);
 		generateLevel();
+
+		add(new Spawner(30, 30, SpawnerType.PARTICLE, 500, this, true));
 	}
 
 	protected void generateLevel() {
 	}
 
 	public void add(Entity e) {
-		entities.add(e);
-	}
+		e.init(this);
+		if (e instanceof Particle) {
+			particles.add((Particle) e);
 
-	public void addProjectiles(Projectile e) {
-		getProjectiles().add(e);
+		} else if (e instanceof Projectile) {
+			projectiles.add((Projectile) e);
+
+		} else {
+
+			entities.add(e);
+		}
 	}
 
 	protected void loadLevel(String path) {
@@ -55,6 +68,12 @@ public class Level {
 		}
 		for (int i = 0; i < getProjectiles().size(); i++) {
 			getProjectiles().get(i).update();
+		}
+		for (int i = 0; i < particles.size(); i++) {
+			particles.get(i).update();
+			if (particles.get(i).isRemoved()) {
+				particles.remove(i);
+			}
 		}
 	}
 
@@ -83,12 +102,16 @@ public class Level {
 			}
 		}
 
-		// for (int i = 0; i < entities.size(); i++) {
-		// entities.get(i).render(screen);
-		// }
+		for (int i = 0; i < entities.size(); i++) {
+			entities.get(i).render(screen);
+		}
 		for (int i = 0; i < getProjectiles().size(); i++) {
 			getProjectiles().get(i).render(screen);
 		}
+		for (int i = 0; i < particles.size(); i++) {
+			particles.get(i).render(screen);
+		}
+
 	}
 
 	// Grass = 0xFF00FF00;

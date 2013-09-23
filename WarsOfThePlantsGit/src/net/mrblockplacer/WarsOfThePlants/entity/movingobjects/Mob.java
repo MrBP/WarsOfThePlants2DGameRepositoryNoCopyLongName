@@ -1,5 +1,6 @@
 package net.mrblockplacer.WarsOfThePlants.entity.movingobjects;
 
+import net.mrblockplacer.WarsOfThePlants.effects.Particle;
 import net.mrblockplacer.WarsOfThePlants.entity.Entity;
 import net.mrblockplacer.WarsOfThePlants.entity.projectiles.BulletProjectile;
 import net.mrblockplacer.WarsOfThePlants.entity.projectiles.Projectile;
@@ -39,12 +40,19 @@ public abstract class Mob extends Entity {
 			waterSound++;
 		}
 
+		int a = 0;
 		if (!collision(0, ya * mob.getSpeed()) || hasPhaseSuit) {
 			y += ya * mob.getSpeed();
+			a = 1;
 		}
 
 		if (!collision(xa * mob.getSpeed(), 0) || hasPhaseSuit) {
 			x += xa * mob.getSpeed();
+			a = 1;
+		}
+		if (a == 1) {
+			Particle pa = new Particle(x, y, 100);
+			level.add(pa);
 		}
 		if (mob instanceof Player) {
 			// JOptionPane.showMessageDialog(null, "HI");
@@ -68,12 +76,11 @@ public abstract class Mob extends Entity {
 	protected void shoot(int x, int y, double dir) {
 		Projectile p = new BulletProjectile(x, y, dir);
 		p.init(level);
-		level.addProjectiles(p);
+		level.add(p);
 		Audio.playSound(Audio.SOUND_BOUNCE);
 	}
 
 	public void update() {
-
 	}
 
 	public void render() {

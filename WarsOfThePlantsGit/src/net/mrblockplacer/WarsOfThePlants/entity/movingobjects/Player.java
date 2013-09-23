@@ -8,6 +8,8 @@ import net.mrblockplacer.WarsOfThePlants.inputs.Mouse;
 import net.mrblockplacer.WarsOfThePlants.level.TileCoordinate;
 import net.mrblockplacer.WarsOfThePlants.render.Screen;
 import net.mrblockplacer.WarsOfThePlants.render.Sprite;
+import net.mrblockplacer.WarsOfThePlants.render.SpriteAnimated;
+import net.mrblockplacer.WarsOfThePlants.render.SpriteSheets;
 
 public class Player extends Mob {
 
@@ -17,6 +19,7 @@ public class Player extends Mob {
 	private boolean walking = false;
 	private int speed = 2;
 	public int id;
+//	private SpriteAnimated test = new SpriteAnimated(SpriteSheets.player_down, 32, 32, 3);
 
 	public Player(Keyboard input) {
 		this.input = input;
@@ -46,8 +49,8 @@ public class Player extends Mob {
 	int lastSpeed = 1;
 
 	public void update() {
-//		MainClass.network.sendText("HI");
-
+		// MainClass.network.sendText("HI");
+//		test.update();
 		if (MainClass.canPlayerMove) {
 			int xa = 0, ya = 0;
 			if (anim < 7500)
@@ -177,7 +180,7 @@ public class Player extends Mob {
 				}
 			}
 		}
-
+//		sprite = test.getSprite();
 		screen.renderPlayer(x - 16, y - 16, sprite, flip);
 
 	}

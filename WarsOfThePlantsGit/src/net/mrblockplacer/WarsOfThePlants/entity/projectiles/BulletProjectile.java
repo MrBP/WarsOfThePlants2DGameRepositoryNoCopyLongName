@@ -1,5 +1,6 @@
 package net.mrblockplacer.WarsOfThePlants.entity.projectiles;
 
+import net.mrblockplacer.WarsOfThePlants.effects.Particle;
 import net.mrblockplacer.WarsOfThePlants.render.Screen;
 import net.mrblockplacer.WarsOfThePlants.render.Sprite;
 
@@ -28,6 +29,8 @@ public class BulletProjectile extends Projectile {
 			y += ny;
 		} else {
 			remove();
+			Particle pa = new Particle((int) x, (int) y, 50);
+			level.add(pa);
 		}
 		if (calculateDist() >= range) {
 			remove();
