@@ -70,7 +70,7 @@ public class Sprite {
 	public static Sprite player_side_2 = new Sprite(32, 1, 7, SpriteSheets.tiles);
 
 	// particles
-	public static Sprite particle_n = new Sprite(3, 0xFFFFFF);
+	public static Sprite particle_n = new Sprite(3, 0xFF0000);
 
 	protected Sprite(int width, int height, SpriteSheets sheet) {
 		SIZE = width == height ? width : -1;
